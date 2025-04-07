@@ -177,3 +177,29 @@ button {
   margin-top: 0;
   color:  rgb(226, 226, 34);
 }
+.links-page {
+  background-color: black;
+  color: white;
+  padding: 20px;
+height: 100vh;
+}
+
+.links-page ul {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.links-page ul li {
+  margin: 10px 0;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.links-page ul li:hover {
+  color: gray; 
+}
+
+.links-page ul li a {
+  text-decoration: none;
+  color: inherit;
+}
