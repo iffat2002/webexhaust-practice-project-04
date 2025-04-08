@@ -52,7 +52,7 @@ const CursorAnimation = () => {
             end: "top -10%",
             scrub: false,
             once: false,
-            markers: true,
+            markers: false,
             toggleActions: "play none none reverse",
             onEnterBack: () => {
               gsap.to(row.querySelector(".table-right"), {
@@ -83,7 +83,7 @@ const CursorAnimation = () => {
         start: "top bottom",
         end: "bottom top",
         scrub: true,
-        markers: true,
+        markers: false,
       },
     });
 
@@ -98,7 +98,7 @@ const CursorAnimation = () => {
           start: "top bottom",
           end: "bottom top",
           scrub: true,
-          markers: true,
+          markers: false,
         },
       }
     );
@@ -111,7 +111,7 @@ const CursorAnimation = () => {
         start: "top top",
         end: "bottom top",
         toggleActions: "play reverse play reverse",
-        markers: true,
+        markers: false,
       },
     });
 
@@ -122,7 +122,7 @@ const CursorAnimation = () => {
           start: "90vh",
           end: "bottom 30%",
           scrub: true,
-          markers: true,
+          markers: false,
         },
       })
 
@@ -142,7 +142,7 @@ const CursorAnimation = () => {
           start: "top 20%",
           end: "bottom 20%",
           scrub: true,
-          markers: true,
+          markers: false,
         },
       })
       .to(".item-2", { scaleX: 1, scaleY: 0.8, duration: 3 })
