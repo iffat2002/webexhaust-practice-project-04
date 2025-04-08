@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+overflow-x: hidden;
     width: 100%
 }
 .hero{
@@ -153,22 +153,121 @@ height: fit-content;
     font-weight: 300;
  text-transform: uppercase;
 }
-.simple-text{
-    color: #000;
-    text-transform: none;
+
+  
+  .simple-text,  .simple-text-2 {
+    
     font-size: 7vw;
     font-style: italic;
     font-weight: 300;
-    align-items: center;
+
+    min-width: 300%;
+    gap: 2rem;
+    color: #000;
+  }
+
+
+
+  .x-text, .x-text-2 {
     display: flex;
-    overflow-x: hidden;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .simple-text ,  .simple-text-2{
+    display: flex;
+    align-items:center;
+  }
+
+  .visual-feed{
+    height:250vh;
     width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: max-content;
-}
-.x-text{
+    position: relative;
+    background-color: #fff;
+    will-change: background;
+  }
+  .visual-text{
+    z-index: 4100;
+    color: #fff;
+    text-align: center;
+    font-size: 13vw;
+    line-height: 100%;
+  }
+  .wrapper{
+    mix-blend-mode: difference;
+position: absolute;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    overflow-x: hidden;
-    padding: 1rem 0rem;
-}
+    height: 100vh;
+    display: flex
+;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    z-index: 40;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+
+    flex-flow: column;
+
+  }
+  .text-block{
+    font-size: 20px;
+    color: #fff;
+  }
+  .grid-box{
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
+    flex-flow: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: flex
+;
+  }
+  .item-1{
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    flex-flow: column;
+    align-items: stretch;
+    width: 45%;
+    margin-top: 10%;
+    margin-right: 0%;
+    display: flex
+;
+    position: relative;
+    overflow: hidden;
+  }
+  .text-container{
+    width: 100%;
+    position:absolute;
+    top: 0;
+    bottom: 0  ;
+  }
+  .item-2{
+    z-index: 220;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    flex-flow: column;
+    align-items: stretch;
+    width: 45%;
+    margin-top: 10%;
+    margin-right: 0%;
+    display: flex
+;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40%;
+  }
+  .item-img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+ 
+    inset: 0%;
+    display: inline-block;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
