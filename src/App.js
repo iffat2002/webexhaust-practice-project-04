@@ -6,6 +6,7 @@ import HomeIndex from "./pages/HomeIndex";
 import TeamView from "./pages/TeamView";
 import CursorAnimation from "./pages/CursorAnimation";
 import MotionPath from "./pages/MotionPath";
+import Harison from "./pages/Harison";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/team-view" element={<TeamView />} />
         <Route path="/cursor-animation" element={<CursorAnimation />} />
         <Route path="/motionpath" element={<MotionPath />} />
+        <Route path="/harison" element={<Harison />} />
       </Routes>
     </BrowserRouter>
   );

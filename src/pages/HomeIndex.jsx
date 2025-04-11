@@ -12,6 +12,8 @@ const HomeIndex = () => {
         <li><a href='/team-view'>Team View</a></li>
         <li><a href='/cursor-animation'>Cursor Animation</a></li>
         <li><a href='/motionpath'>MotionPath and Flip Animation</a></li>
+        <li><a href='/harison'>Harison website</a></li>
+
     </ul>
 
 
