@@ -148,10 +148,53 @@ const CursorAnimation = () => {
       .to(".item-2", { scaleX: 1, scaleY: 0.8, duration: 3 })
       .to(".item-2", {
         scaleX: 0,
-        scaleY: 2,
+        scaleY: 2.3,
         skewY: -3,
         skewX: 0,
         duration: 2,
+      });
+
+
+      gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".item-3",
+          start: "top top",
+          end: "top -100%",
+       
+          scrub: true,
+          markers: true,
+        },
+      })
+      .to(".item-3", { scaleX: 1.1,  duration: 3 })
+      .to(".item-3", {
+        scaleX: 0,
+        scaleY: 1.3,
+        skewY: -6,
+        delay:10,
+        skewX: 0,
+        duration: 10,
+      });
+
+
+      gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".item-4",
+          start: "top 20%",
+         end: "top -30%",
+          scrub: true,
+          markers: false,
+        
+        },
+      })
+      .to(".item-4", { scaleX: 1.3, scaleY: 0.8, duration: 6 })
+      .to(".item-4", {
+        scaleX: 0,
+        scaleY: 0.8,
+        skewY: -3,
+        skewX: 0,
+        duration: 4,
       });
   }, []);
 
@@ -240,6 +283,24 @@ const CursorAnimation = () => {
             <img
               className="item-img"
               src="https://cdn.prod.website-files.com/67b2f066e72dd42bd56d8751/67b2f066e72dd42bd56d878c_1920_ebh-mobile01.avif"
+            />
+          </div>
+
+          <div className="item-3">
+            <img
+              className="item-img-2"
+              src="https://cdn.prod.website-files.com/67b2f066e72dd42bd56d8751/67b2f066e72dd42bd56d87a8_lowago_04.avif"
+            />
+          </div>
+          <div className="item-4">
+            <img
+              className="item-img-4"
+            />
+          </div>
+          <div className="item-4">
+            <img
+              className="item-img-4"
+              src="https://cdn.prod.website-files.com/67b2f066e72dd42bd56d8751/67b2f066e72dd42bd56d8773_face01.avif"
             />
           </div>
         </div>
