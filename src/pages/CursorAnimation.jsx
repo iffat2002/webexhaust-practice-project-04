@@ -21,7 +21,7 @@ const CursorAnimation = () => {
         },
         x: 0, // translateX
         y: 0, // translateY
-        z: 0, // translateZ (use with `transformPerspective` or 3D context)
+        z: 0, 
         willChange: "width, height, transform",
         width: "400vw",
         scaleX: 1,
@@ -32,7 +32,7 @@ const CursorAnimation = () => {
         rotateZ: 359,
         skewX: 0,
         skewY: 0,
-        transformStyle: "preserve-3d !important", // for 3D context
+        transformStyle: "preserve-3d !important", 
         ease: "none",
       });
     });
