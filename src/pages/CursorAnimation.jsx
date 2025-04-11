@@ -163,7 +163,7 @@ const CursorAnimation = () => {
           end: "top -100%",
        
           scrub: true,
-          markers: true,
+          markers: false,
         },
       })
       .to(".item-3", { scaleX: 1.1,  duration: 3 })
