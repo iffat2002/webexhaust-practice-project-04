@@ -102,7 +102,7 @@ const TeamView = () => {
                 trigger: ".team-img",
                 start: "top 0px",
                 scrub: true,
-                markers: true,
+                markers: false,
               },
             })
             .to(".team1", {
@@ -117,7 +117,7 @@ const TeamView = () => {
                 trigger: ".team-img",
                 start: "top 0px",
                 scrub: true,
-                markers: true,
+                markers: false,
               },
             })
             .to(".team2", {

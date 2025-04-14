@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./harison.css";
 import gsap from "gsap";
 import harison from "../images/harison.avif";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import icon from "../images/insta.svg";
+import AnimatedText from "../components/AnimatedText";
 
 gsap.registerPlugin(ScrollTrigger);
 const Harison = () => {
+  const textRef = useRef(null);
+  const moveUp = useRef(null);
   useEffect(() => {
     const bottoms = [".logo-bottom1", ".logo-bottom2", ".logo-bottom3"];
 
@@ -29,54 +32,104 @@ const Harison = () => {
       );
     });
 
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: ".video1",
-        start: "top bottom",  
-        end: "top top",       
-        scrub: true,
-        markers: true,
-      },
-    })
-    .fromTo(
-      ".video1",
-      { scaleX: 0.8 },
-      { scaleX: 1, transformOrigin: "center center" }
-    );
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".video1",
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+          markers: false,
+        },
+      })
+      .fromTo(
+        ".video1",
+        { scaleX: 0.8 },
+        { scaleX: 1, transformOrigin: "center center" }
+      );
 
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: ".banner-full",
-        start: "top bottom",  
-        end: "top top",       
-        scrub: true,
-        markers: true,
-      },
-    })
-    .fromTo(
-      ".banner-full",
-      { scaleX: 0.5 },
-      { scaleX: 1, transformOrigin: "center center" }
-    );
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".banner-full",
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+          markers: false,
+        },
+      })
+      .fromTo(
+        ".banner-full",
+        { scaleX: 0.5 },
+        { scaleX: 1, transformOrigin: "center center" }
+      );
 
-
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: ".video3",
-        start: "top bottom",  
-        end: "top top",       
-        scrub: true,
-        markers: true,
-      },
-    })
-    .fromTo(
-      ".video3",
-      { scaleX: 0.5 },
-      { scaleX: 1, transformOrigin: "center center" }
-    );
-
-
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: ".video3",
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+          markers: false,
+        },
+      })
+      .fromTo(
+        ".video3",
+        { scaleX: 0.5 },
+        { scaleX: 1, transformOrigin: "center center" }
+      );
   }, []);
+  const itemRef = useRef(null);
+  const borderRef = useRef(null);
+
+ 
+
+  useEffect(() => {
+    const items = document.querySelectorAll(".service-item");
+
+    items.forEach((item) => {
+      const border = item.querySelector(".bottom-border");
+
+      item.addEventListener("mouseenter", () => {
+        gsap.to(border, {
+          scaleX: 1,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+      });
+
+      item.addEventListener("mouseleave", () => {
+        gsap.to(border, {
+          scaleX: 0,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+      });
+    });
+  }, []);
+
+  const handleMouseEnter = () => {
+    const el = textRef.current;
+
+    gsap.to(el, {
+      y: -30,
+
+      duration: 0.2,
+
+      onComplete: () => {
+        gsap.set(el, { y: 30 }); // move below
+        gsap.to(el, {
+    y:0,
+          opacity: 1,
+          duration: 0.2,
+      
+        });
+      }
+    });
+  };
+
+
 
   return (
     <div>
@@ -148,30 +201,54 @@ const Harison = () => {
         className="
 video-container"
       >
-        
-        <video className="video1" autoPlay loop muted playsInline>
-          <source
-            src="https://source.fouroom.co/video/pexels-videos-06.mp4"
-            type="video/mp4"
+        <div className="slide-1">
+          <video className="video1" autoPlay loop muted playsInline>
+            <source
+              src="https://source.fouroom.co/video/pexels-videos-06.mp4"
+              type="video/mp4"
+            />
+          </video>
+          <img
+            className="center-banner"
+            src="https://framerusercontent.com/images/4xAOhFIZ4llQfMiXVZotSt71hBs.jpg"
+            alt="banner"
+            width={596}
+            height={395}
           />
-        </video>
-        <img className="center-banner" src="https://framerusercontent.com/images/4xAOhFIZ4llQfMiXVZotSt71hBs.jpg" alt="banner" width={400} height={400} />
-<div className="slide-2">
-        <img className="banner-full" src="https://framerusercontent.com/images/jvNA2Qg0e4bS2Rksj8lC3nbshU.jpg" alt="banner" width={400} height={400} />
-        <video width={629} height={354}  className="video2" autoPlay loop muted playsInline>
-          <source
-          src="https://source.fouroom.co/video/evanston-02.mp4"
-            type="video/mp4"
+        </div>
+        <div className="slide-2">
+          <img
+            className="banner-full"
+            src="https://framerusercontent.com/images/jvNA2Qg0e4bS2Rksj8lC3nbshU.jpg"
+            alt="banner"
+            width={400}
+            height={400}
           />
-        </video>
+          <video
+            width={629}
+            height={354}
+            className="video2"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source
+              src="https://source.fouroom.co/video/evanston-02.mp4"
+              type="video/mp4"
+            />
+          </video>
         </div>
         <div className="slide-3">
-        <video className="video3" autoPlay loop muted playsInline>
-          <source
-            src="https://source.fouroom.co/video/watches-02.mp4"
+          <video className="video3" autoPlay loop muted playsInline>
+            <source src="https://source.fouroom.co/video/watches-02.mp4" />
+          </video>
+          <img
+            width={629}
+            height={354}
+            className="banner-3"
+            src="https://framerusercontent.com/images/Rx7jEden3crkGVCmRkBGrDLw.jpg"
           />
-        </video>
-        <img width={629} height={354}  className="banner-3" src="https://framerusercontent.com/images/Rx7jEden3crkGVCmRkBGrDLw.jpg" />
         </div>
       </div>
 
@@ -216,22 +293,26 @@ video-container"
               <div className="right-top">
                 <p>Services</p>
                 <div className="services-content">
-                  <div className="service-item">
-                    <span>Strategy</span>
+                  <div className="service-item" ref={itemRef}>
+                  <AnimatedText text="Strategy" />  
                     <div className="dot"></div>
+                    <div  ref={borderRef} className="bottom-border"></div>
                   </div>
 
-                  <div className="service-item">
-                    <span>Branding</span>
+                  <div className="service-item ref={itemRef}">
+                  <AnimatedText text="BRANDING" />  
                     <div className="dot"></div>
+                    <div  ref={borderRef} className="bottom-border"></div>
                   </div>
-                  <div className="service-item">
-                    <span>Technology</span>
+                  <div className="service-item" ref={itemRef}>
+                  <AnimatedText text="TECHNOLOGY" />  
                     <div className="dot"></div>
+                    <div  ref={borderRef} className="bottom-border"></div>
                   </div>
-                  <div className="service-item">
-                    <span>Digital</span>
+                  <div className="service-item" ref={itemRef}>
+                  <AnimatedText text="DIGITAL" />
                     <div className="dot"></div>
+                    <div  ref={borderRef} className="bottom-border"></div>
                   </div>
                 </div>
               </div>
@@ -249,24 +330,25 @@ video-container"
 
               <div className="right-bottom">
                 <span>Back to top</span>
-                <button className="purchase">Purchase</button>
+                <button className="purchase" onMouseEnter={handleMouseEnter}>     <span ref={textRef}>Purchase</span></button>
               </div>
             </div>
           </div>
           <div className="footer-bottom">
             <div className="footer-bottom-left">
               <button className="footer-btn">fourroom.co</button>
-              <p className="footer-links">TERMS OF USE</p>
+              <AnimatedText text="TERMS  OF  USE" /> 
               <p className="footer-links">•</p>
-              <p className="footer-links">IMPRTINTS</p>
-            </div>
+          <AnimatedText text="IMPRINTS" />  
+    
+             </div>
             <div className="footer-bottom-left">
-              <p className="footer-links">MADE IN FRAMER</p>
+            <AnimatedText text="MADE IN FRAMER" />  
               <p className="footer-links">•</p>
-              <p className="footer-links">TYPE SET IN INTER</p>
+              <AnimatedText text="TYPE SET IN INTER" />  
 
               <p className="footer-links">•</p>
-              <p className="footer-links">BERLIN, 2024</p>
+              <AnimatedText text="BERLIN, 2024" />  
             </div>
           </div>
         </div>
