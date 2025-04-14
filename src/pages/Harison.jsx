@@ -4,10 +4,12 @@ import gsap from "gsap";
 import harison from "../images/harison.avif";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import icon from "../images/insta.svg";
+import { useNavigate } from "react-router-dom";
 import AnimatedText from "../components/AnimatedText";
 
 gsap.registerPlugin(ScrollTrigger);
 const Harison = () => {
+  const navigate = useNavigate();
   const textRef = useRef(null);
   const moveUp = useRef(null);
   useEffect(() => {
@@ -148,7 +150,7 @@ const Harison = () => {
               />
             </div>
             <div className="right">
-              <div className="work-box">
+              <div className="work-box" onClick={() => navigate("/harison/work")}>
                 <p className="header-anchor">Work</p>
               </div>
               <p className="header-anchor">Archive</p>
