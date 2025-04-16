@@ -345,7 +345,7 @@ const Work = () => {
 
     <div className="overflow-hidden" ref={containerRef}>
       
-      <header  ref={headerRef}>
+      <header className="harison-header"  ref={headerRef}>
         <div className="boxx">
           <div
             className="

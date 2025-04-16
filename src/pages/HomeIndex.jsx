@@ -14,6 +14,7 @@ const HomeIndex = () => {
         <li><a href='/motionpath'>MotionPath and Flip Animation</a></li>
         <li><a href='/harison'>Harison website</a></li>
         <li><a href='/harison/work'>Harison/work Page</a></li>
+        <li><a href='/charlie-drink'>Charlie Drink</a></li>
 
     </ul>
 

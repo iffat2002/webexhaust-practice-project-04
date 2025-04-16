@@ -201,7 +201,7 @@ const Harison = () => {
   return (
     <div ref={pageRef} style={{background:"white"}}>
      
-     <header  ref={headerRef}>
+     <header className="harison-header"  ref={headerRef}>
         <div className="boxx">
           <div
             className="
