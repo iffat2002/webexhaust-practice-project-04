@@ -10,6 +10,7 @@ overflow-x: hidden;
     width: 100%;
 
     font-family: "Inter", sans-serif;
+ z-index: 0;
  
   
 }
@@ -80,12 +81,15 @@ header{
   width: 100%;
   will-change: transform;
   z-index: 100000;
+  color: white;
+  mix-blend-mode: difference;
 }
 .left{
     width: 50%;
     mix-blend-mode: difference;
     position: relative;
     z-index: 1000;
+    filter: invert(1);
 
 }
 .right{
@@ -367,6 +371,7 @@ color: white;
   display: flex;
   align-items: center;
 
+
 }
 
 .horizontal-section {
@@ -561,5 +566,10 @@ position: relative;
   width: 100vw;
 
  
+
+}
+.work-page{
+  width: 100%;
+  
 
 }

@@ -10,6 +10,33 @@ import AnimatedText from "../components/AnimatedText";
 gsap.registerPlugin(ScrollTrigger);
 const Harison = () => {
   const navigate = useNavigate();
+  const pageRef = useRef(null);
+
+  const handleNavigate = () => {
+    gsap.fromTo(
+      pageRef.current,
+      {
+        opacity: 1,
+      },
+      {
+        opacity: 0.4,
+        duration: 0.4,
+        
+        onComplete: () => {
+          navigate("/harison/work"); 
+        },
+      }
+    );
+  };
+  
+
+  useEffect(() => {
+    gsap.fromTo(
+      pageRef.current,
+      {  opacity: 0 },
+      {opacity: 1, duration:1,  }
+    );
+  }, []);
   const textRef = useRef(null);
   const moveUp = useRef(null);
   useEffect(() => {
@@ -133,9 +160,48 @@ const Harison = () => {
 
 
 
+  const logoRef = useRef(null);
+  const linksRef = useRef([]);
+  const headerRef = useRef(null);
+
+  // Clear on each render to avoid duplicates (especially in dev mode)
+  linksRef.current = [];
+
+  useEffect(() => {
+    const tl = gsap.timeline({});
+  
+    // Logo animation: from opacity 0 and y: 50 → to opacity 1 and y: 0
+    tl.fromTo(
+      logoRef.current,
+      { y: 80, opacity: 0 },
+      { y: 0, opacity: 1, duration: 2 }
+    );
+  
+    // Links animation: from opacity 0 and y: 30 → to opacity 1 and y: 0
+    tl.fromTo(
+      linksRef.current,
+      { y: 80, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.2,
+        duration: 1,
+      },
+      "-=2" // Overlap a bit with logo animation
+    );
+  }, []);
+
+
+    const handleScrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+      
+      });
+    };
   return (
-    <div>
-      <header>
+    <div ref={pageRef} style={{background:"white"}}>
+     
+     <header  ref={headerRef}>
         <div className="boxx">
           <div
             className="
@@ -143,25 +209,36 @@ const Harison = () => {
           >
             <div className="left">
               <img
+              ref={logoRef}
+              onClick={handleNavigate}
                 src="https://framerusercontent.com/images/E4ICFTxGKZdn6E6cf8MfRB6M5Ak.png?scale-down-to=512"
                 alt="logo"
                 width={100}
                 height={16}
               />
             </div>
-            <div className="right">
-              <div className="work-box" onClick={() => navigate("/harison/work")}>
-                <p className="header-anchor">Work</p>
-              </div>
-              <p className="header-anchor">Archive</p>
-              <p className="header-anchor">Studio</p>
-              <p className="header-anchor">Press</p>
-              <p className="header-anchor">Contact</p>
-              <p className="header-anchor">Buy Template</p>
-            </div>
+           
+           
+          <div className="right">
+            {["Work", "Archive", "Studio", "Press", "Contact", "Buy Template"].map(
+              (text, index) => (
+                <p
+                  key={index}
+                  ref={(el) => (linksRef.current[index] = el)}
+                  className="header-anchor"
+                  onClick={handleNavigate}
+                >
+                  {text}
+                </p>
+              )
+            )}
+          </div>
+
           </div>
         </div>
       </header>
+    <div>
+    
 
       <div>
         <div className="boxx">
@@ -331,7 +408,7 @@ video-container"
               </div>
 
               <div className="right-bottom">
-                <span>Back to top</span>
+                <span onClick={handleScrollToTop}>Back to top</span>
                 <button className="purchase" onMouseEnter={handleMouseEnter}>     <span ref={textRef}>Purchase</span></button>
               </div>
             </div>
@@ -355,6 +432,7 @@ video-container"
           </div>
         </div>
       </footer>
+    </div>
     </div>
   );
 };

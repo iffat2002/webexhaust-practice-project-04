@@ -14,9 +14,16 @@ const Work = () => {
   const itemRef = useRef(null);
   const slideRef = useRef(null);
   const borderRef = useRef(null);
+  const pageRef = useRef(null);
 
  
-
+  useEffect(() => {
+    gsap.fromTo(
+      containerRef.current,
+      { y: "100vh", opacity: 1 },
+      { y: 0, opacity: 1, duration: 1, ease:"power1.inOut" ,}
+    );
+  }, []);
   const handleMouseLeave = (card) => {
     const hoverImg = card.querySelector(".hover-img");
     const mainImg = card.querySelector(".main-img");
@@ -30,6 +37,7 @@ const Work = () => {
       scaleY: 0,
       transformOrigin: "bottom",
       duration: 0.3,
+      
       ease: "none",
     })
       .set(mainImg, {
@@ -81,12 +89,12 @@ const Work = () => {
     const sections = gsap.utils.toArray(".single-section");
     const slider = sliderRef.current;
     const totalScrollWidth = slider.scrollWidth - window.innerWidth;
-
+    
     let ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top top",
+          start: "top 100%",
           end: () => `+=${totalScrollWidth + window.innerWidth}`, // ← This is the key fix
           scrub: true,
           pin: true,
@@ -249,9 +257,95 @@ const Work = () => {
       });
   };
   
+  const handleKeyDown = (e) => {
+    const el = footerRef.current;
+    const { scrollTop, scrollHeight, clientHeight } = el;
+
+    const atTop = scrollTop === 0;
+    const atBottom = scrollTop + clientHeight >= scrollHeight;
+
+    let delta = 0;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        delta = 40;
+        break;
+      case 'ArrowUp':
+        delta = -40;
+        break;
+      case 'PageDown':
+        delta = clientHeight;
+        break;
+      case 'PageUp':
+        delta = -clientHeight;
+        break;
+      default:
+        return; // let other keys pass
+    }
+
+    if ((delta < 0 && !atTop) || (delta > 0 && !atBottom)) {
+      e.preventDefault();
+      e.stopPropagation();
+      el.scrollTop += delta;
+    }
+  };
+
+  useEffect(() => {
+    const el = footerRef.current;
+    if (el) {
+      el.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      if (el) {
+        el.removeEventListener('keydown', handleKeyDown);
+      }
+    };
+  }, []);
+
+
+  const logoRef = useRef(null);
+  const linksRef = useRef([]);
+  const headerRef = useRef(null);
+
+  // Clear on each render to avoid duplicates (especially in dev mode)
+  linksRef.current = [];
+
+  useEffect(() => {
+    const tl = gsap.timeline({});
+  
+    // Logo animation: from opacity 0 and y: 50 → to opacity 1 and y: 0
+    tl.fromTo(
+      logoRef.current,
+      { y: 80, opacity: 0 },
+      { y: 0, opacity: 1, duration: 2 }
+    );
+  
+    // Links animation: from opacity 0 and y: 30 → to opacity 1 and y: 0
+    tl.fromTo(
+      linksRef.current,
+      { y: 80, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.2,
+        duration: 1,
+      },
+      "-=2" // Overlap a bit with logo animation
+    );
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+    
+    });
+  };
   return (
+
     <div className="overflow-hidden" ref={containerRef}>
-      <header>
+      
+      <header  ref={headerRef}>
         <div className="boxx">
           <div
             className="
@@ -259,6 +353,7 @@ const Work = () => {
           >
             <div className="left">
               <img
+              ref={logoRef}
                 onClick={() => navigate("/harison")}
                 src="https://framerusercontent.com/images/E4ICFTxGKZdn6E6cf8MfRB6M5Ak.png?scale-down-to=512"
                 alt="logo"
@@ -266,19 +361,25 @@ const Work = () => {
                 height={16}
               />
             </div>
-            <div className="right">
-              <div
-                className="work-box"
-                onClick={() => navigate("/harison/work")}
-              >
-                <p className="header-anchor">Work</p>
-              </div>
-              <p className="header-anchor">Archive</p>
-              <p className="header-anchor">Studio</p>
-              <p className="header-anchor">Press</p>
-              <p className="header-anchor">Contact</p>
-              <p className="header-anchor">Buy Template</p>
-            </div>
+           
+           
+          <div className="right">
+            {["Work", "Archive", "Studio", "Press", "Contact", "Buy Template"].map(
+              (text, index) => (
+                <p
+                  key={index}
+                  ref={(el) => (linksRef.current[index] = el)}
+                  className="header-anchor"
+                  onClick={() =>
+                    text === "Work" ? navigate("/harison/work") : null
+                  }
+                >
+                  {text}
+                </p>
+              )
+            )}
+          </div>
+
           </div>
         </div>
       </header>
@@ -325,7 +426,7 @@ const Work = () => {
           ))}
         </div>
 
-        <div   ref={footerRef} className="single-section bg-orange">
+        <div   ref={footerRef}  tabIndex={0} className="single-section bg-orange">
           <div className="center-text">
             <h1>EXPLORE ARCHIVE <span className="big-dot"></span></h1>
             
@@ -479,7 +580,7 @@ const Work = () => {
                     </div>
       
                     <div className="right-bottom">
-                      <span>Back to top</span>
+                      <span onClick={handleScrollToTop}>Back to top</span>
                       <button className="purchase" onMouseEnter={handleMouseEnter}>     <span ref={textRef}>Purchase</span></button>
                     </div>
                   </div>
@@ -510,6 +611,7 @@ const Work = () => {
        
      
     </div>
+
   );
 };
 
