@@ -28,6 +28,7 @@ const CharlieDrink = () => {
 
                 <img class="hero-bg" src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119.avif" alt="" sizes="(max-width: 4422px) 100vw, 4422px" data-w-id="4b2aa2c9-4cc5-ed73-db87-c615f79b8c62" loading="lazy" srcset="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-500.png 500w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-800.png 800w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-1080.png 1080w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-1600.png 1600w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-2000.png 2000w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119.avif 4422w"/>
 <div className="tap"><span>TAP</span></div>
+<div className='hero-center'>hello world</div>
 <video className="cd-hero-video" autoPlay loop muted playsInline width={660} height={660}>
     <source src="https://pub-fb9062f1fe2444cd88ae29118656462c.r2.dev/Charlies_casis_%5B001-128%5D-vp9-chrome.webm" type="video/mp4"></source>
     </video>
