@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import hero from "../hero.png";
 import "./CharlieDrink.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -63,31 +64,8 @@ const CharlieDrink = () => {
   ];
   const stepperRef = useRef(null);
 
-  useEffect(() => {
-    const items = stepperRef.current?.querySelectorAll(".stepper-item") || [];
-
-    items.forEach((item) => {
-      gsap.fromTo(
-        item,
-        { opacity: 1, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top top",
-            toggleActions: "play none none reverse",
-            markers: true, // Enable to debug scroll points
-          },
-        }
-      );
-    });
-  }, []);
-
   const wrapperRef = useRef(null);
-
+  //bubbles
   useEffect(() => {
     const introWrapper = wrapperRef.current;
 
@@ -150,6 +128,360 @@ const CharlieDrink = () => {
     return () => introWrapper.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  const containerRef = useRef(null);
+  const circleRef = useRef(null);
+  const [HeroBg, setHerobg] = useState([
+    "#a19bd9",
+    "#f7d064",
+    "hsla(23.368421052631586, 84.07%, 77.84%, 1.00)",
+    "#c3d250",
+  ]);
+  const [video, setVideo] = useState([
+    "https://pub-fb9062f1fe2444cd88ae29118656462c.r2.dev/Charlies_casis_%5B001-128%5D-vp9-chrome.webm",
+    "https://pub-fb9062f1fe2444cd88ae29118656462c.r2.dev/Charlies_passionfruit_%5B001-128%5D-vp9-chrome.webm",
+    "https://pub-fb9062f1fe2444cd88ae29118656462c.r2.dev/Charlies_Orange%20%26%20Mandarin_%5B001-128%5D-vp9-chrome.webm",
+    "https://pub-fb9062f1fe2444cd88ae29118656462c.r2.dev/Charlies_Raspberry_%5B001-128%5D-vp9-chrome.webm",
+  ]);
+  const [bgIndex, setBgIndex] = useState(0);
+
+  const handleTap = () => {
+    const nextIndex = (bgIndex + 1) % HeroBg.length;
+    const container = containerRef.current;
+
+    // Create ripple
+    const ripple = document.createElement("div");
+    ripple.style.position = "absolute";
+    ripple.style.left = "50%";
+    ripple.style.top = "50%";
+    ripple.style.transform = "translate(-50%, -50%)";
+    ripple.style.borderRadius = "50%";
+    ripple.style.backgroundColor = HeroBg[nextIndex];
+    ripple.style.width = "0px";
+    ripple.style.height = "0px";
+    ripple.style.zIndex = 2;
+    ripple.style.pointerEvents = "none";
+    container.appendChild(ripple);
+
+    const finalSize = Math.max(window.innerWidth, window.innerHeight) * 2;
+
+    gsap.to(ripple, {
+      width: finalSize,
+      height: finalSize,
+      duration: 0.8,
+      ease: "power2.out",
+      onComplete: () => {
+        container.style.backgroundColor = HeroBg[nextIndex];
+        container.removeChild(ripple);
+        setBgIndex(nextIndex);
+      },
+    });
+  };
+
+  //tap movement
+  useEffect(() => {
+    const container = containerRef.current;
+    const circle = circleRef.current;
+
+    const circleSize = 120; // must match CSS width/height
+
+    const handleMouseMove = (e) => {
+      const rect = container.getBoundingClientRect();
+      const rawX = e.clientX - rect.left;
+      const rawY = e.clientY - rect.top;
+
+      // Clamp position so circle stays fully inside container
+      const x = Math.max(
+        circleSize / 2,
+        Math.min(rawX, rect.width - circleSize / 2)
+      );
+      const y = Math.max(
+        circleSize / 2,
+        Math.min(rawY, rect.height - circleSize / 2)
+      );
+
+      gsap.to(circle, {
+        x: x - circleSize / 2,
+        y: y - circleSize / 2,
+        duration: 0.6,
+
+        ease: "none",
+      });
+    };
+
+    container.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      container.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  //hero float
+  const videoRef = useRef(null);
+  const imageRef = useRef(null);
+  const centerImgRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const handleMouseMove = (e) => {
+      const { left, top, width, height } = container.getBoundingClientRect();
+      const x = e.clientX - left;
+      const y = e.clientY - top;
+
+      // Normalize between -1 and 1
+      const offsetX = (x / width - 0.5) * 2;
+      const offsetY = (y / height - 0.5) * 2;
+
+      const moveAmount = 15; // Adjust for stronger/weaker float
+
+      gsap.to([videoRef.current, imageRef.current, centerImgRef.current], {
+        x: offsetX * moveAmount,
+        y: offsetY * moveAmount,
+        ease: "power2.out",
+        duration: 0.6,
+      });
+    };
+
+    const reset = () => {
+      gsap.to([videoRef.current, imageRef.current, centerImgRef.current], {
+        x: 0,
+        y: 0,
+        ease: "power2.out",
+        duration: 0.8,
+      });
+    };
+
+    container.addEventListener("mousemove", handleMouseMove);
+    container.addEventListener("mouseleave", reset);
+
+    return () => {
+      container.removeEventListener("mousemove", handleMouseMove);
+      container.removeEventListener("mouseleave", reset);
+    };
+  }, []);
+
+  //product section
+  const productRef = useRef([]);
+  const canImgRef = useRef([]);
+  const bgRef = useRef([]);
+
+  // Initialize refs for each product based on the products length
+  useEffect(() => {
+    productRef.current = productRef.current.slice(0, products.length);
+    canImgRef.current = canImgRef.current.slice(0, products.length);
+    bgRef.current = bgRef.current.slice(0, products.length);
+  }, [products.length]);
+
+  // Hover animation on mouse enter
+  const onEnter = (index) => {
+    gsap.to(bgRef.current[index], {
+      scale: 1.1,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+    gsap.to(canImgRef.current[index], {
+      rotate: 12,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  // Hover animation on mouse leave
+  const onLeave = (index) => {
+    gsap.to(bgRef.current[index], {
+      scale: 1,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+    gsap.to(canImgRef.current[index], {
+      rotate: 0,
+      duration: 0.8,
+      ease: "power3.out",
+    });
+  };
+
+  //marquee section + info section
+  useEffect(() => {
+    //info
+    gsap.fromTo(
+      ".info_text-wrapper",
+      { y: 200 },
+      {
+        y: 0,
+        scrollTrigger: {
+          trigger: ".info-section",
+          start: "top 50%",
+        },
+      }
+    );
+    //marquee
+    gsap.fromTo(
+      ".m-list",
+      { x: 0 },
+      {
+        x: "-25%", // move half the width left
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".m-list",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          // markers: true,
+        },
+      }
+    );
+    //cards slide up
+    const tl = gsap.timeline({});
+    tl.fromTo(
+      ".step-mask",
+      { scaleX: 0.7 },
+      {
+        scaleX: 1,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: ".steps-section",
+          start: "top bottom ",
+          end: "top top ",
+          scrub: true,
+          markers: true,
+        },
+      }
+    );
+    tl.fromTo(
+      ".stepper-wrapper",
+      { y: 0 },
+      {
+        y: "-64%",
+        duration: 0.1,
+
+        scrollTrigger: {
+          trigger: ".steps-section",
+          start: "top top ",
+          end: "bottom 90% ",
+          scrub: true,
+          markers: true,
+        },
+      }
+    );
+  }, []);
+
+  //colored slides
+  useEffect(() => {
+    gsap.to(".yellow-slide", {
+      scaleX: "0.7",
+      rotate: "-4deg",
+      scrollTrigger: {
+        trigger: ".colored-slides",
+        start: "bottom 95%",
+        end: "bottom top",
+        scrub: true,
+        // markers: true,
+      },
+    });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".yellow-slide",
+        start: "top 50%",
+        end: "bottom top",
+        scrub: true,
+        // markers: true,
+      },
+    });
+
+    tl.fromTo(
+      ".yellow-slide",
+      { width: "80%", height: "80%" },
+      {
+        scaleX: 1.1,
+        scaleY: 1.1,
+        scaleZ: 1,
+        height: "100vh",
+        width: "100vw",
+        ease: "none",
+        duration: 2,
+      }
+    ).fromTo(
+      ".slide-t",
+      { clipPath: "inset(100% 0% 0% 0%)" }, // fully hidden from bottom
+      { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
+      "-=1"
+    );
+    tl.fromTo(
+      ".lemon_img",
+      { scaleX: 0, scaleY: 0 },
+      { scaleX: 1, scaleY: 1 },
+      "-=0.4"
+    );
+    tl.fromTo(
+      ".blue-slide",
+      { scaleX: 0, scaleY: 0 },
+      {
+        scaleX: 18,
+        scaleY: 18,
+        scaleZ: 1,
+        ease: "power3.inOut",
+        delay: 0.5,
+      }
+    );
+    tl.to(".lemon_img", { scaleX: 0, scaleY: 0 }, "-=0.4");
+    tl.fromTo(".text-img", { y: 300 }, { y: 0, ease: "power2.inOut" }, "-=0.4");
+    tl.set(".p1", { display: "none" }, "-=0.4");
+    tl.set(".p2", { display: "flex" }, "-=0.4").fromTo(
+      ".slide-t2",
+      { clipPath: "inset(100% 0% 0% 0%)" },
+      { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
+      "-=0.4"
+    );
+  }, []);
+  //social section
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".socials-section",
+        start: "top 50% ",
+
+        markers: true,
+      },
+    });
+    tl.fromTo(
+      ".h-socials",
+      { y: 500 },
+      {
+        y: 0,
+        duration: "0.4",
+      }
+    )
+ .fromTo(
+      ".cd-slider-component",
+      { x: 0 },
+      {
+        x: "-15%", 
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".cd-slider-component",
+          start: "top bottom",
+          end: "top 20%",
+          scrub: true,
+          // markers: true,
+        },
+      }
+    )
+    .fromTo(
+      ".zoom-img",
+      {scale:0.9},
+      {
+      scale:1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".zoom-img",
+          start: "top 50%",
+          
+        scrub:"true",
+        },
+      }
+    );
+  }, []);
+
   return (
     <div ref={wrapperRef} bubbles="" className="charlie-drink">
       <div className="charlie-drink-header">
@@ -179,8 +511,9 @@ const CharlieDrink = () => {
         </div>
       </div>
       <section className="cd-hero">
-        <div className="cd-hero-wrapper">
+        <div className="cd-hero-wrapper" ref={containerRef}>
           <img
+            ref={imageRef}
             class="hero-bg"
             src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119.avif"
             alt=""
@@ -189,15 +522,16 @@ const CharlieDrink = () => {
             loading="lazy"
             srcset="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-500.png 500w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-800.png 800w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-1080.png 1080w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-1600.png 1600w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-2000.png 2000w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119.avif 4422w"
           />
-          <div className="tap">
+          <div className="tap" ref={circleRef} onClick={handleTap}>
             <span>TAP</span>
           </div>
-          <div className="hero-center">hello world
-
-          {/* <img src={} width={200} height={200} alt></img> */}
+          <div className="hero-center" ref={centerImgRef}>
+            <img src={hero} width={616} height={430} alt></img>
           </div>
           <video
+            ref={videoRef}
             className="cd-hero-video"
+            key={video[bgIndex]}
             autoPlay
             loop
             muted
@@ -205,10 +539,7 @@ const CharlieDrink = () => {
             width={660}
             height={660}
           >
-            <source
-              src="https://pub-fb9062f1fe2444cd88ae29118656462c.r2.dev/Charlies_casis_%5B001-128%5D-vp9-chrome.webm"
-              type="video/mp4"
-            ></source>
+            <source src={video[bgIndex]} type="video/mp4"></source>
           </video>
         </div>
       </section>
@@ -226,15 +557,26 @@ const CharlieDrink = () => {
             return (
               <div
                 className="cd-product"
+                ref={(el) => (productRef.current[index] = el)}
                 key={index}
+                onMouseEnter={() => onEnter(index)}
+                onMouseLeave={() => onLeave(index)}
                 style={{ background: item.bgColor }}
               >
-                <img src={item.canImg} alt="" className="can-img" />
+                <img
+                  src={item.canImg}
+                  alt=""
+                  ref={(el) => (canImgRef.current[index] = el)}
+                  className="can-img"
+                />
                 <div class="product_card-text">
                   <div class="product_card-heading">{item.name}</div>
                   <div class="text-color-white">0 sugar</div>
                 </div>
-                <div className="product_card-bg">
+                <div
+                  ref={(el) => (bgRef.current[index] = el)}
+                  className="product_card-bg"
+                >
                   <img
                     sizes="(max-width: 4422px) 100vw, 4422px"
                     srcset="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-500.png 500w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-800.png 800w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-1080.png 1080w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-1600.png 1600w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119-p-2000.png 2000w, https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/66dadc75a87cf9914f4539d7_Mask%20Group%20119.avif 4422w"
@@ -315,22 +657,55 @@ const CharlieDrink = () => {
       </section>
 
       <section className="colored-slides">
-        <div className="yellow-slide">
-          <p className="product-text">
-            The product <br></br>
-            Well then, what's not in the can?<br></br>
-            No added sugars, no sweeteners<br></br>
-            No colourants, no preservatives, no concentrates.<br></br>
-            Funny we even mention it, no?
-          </p>
-          <img
-            src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/6745c83eed8b5149d602d8b9_intro_img.avif"
-            loading="lazy"
-            alt=""
-            class="lemon_img"
-          />
-        </div>
-        <div className="blue-slide">
+        <div className="sticky-slide">
+          <div className="mask-slide">
+            <div className="yellow-slide">
+              <p className="product-text p1">
+                <span className="slide-t"> The product</span>
+                <span className="slide-t">
+                  {" "}
+                  Well then, what's not in the can?
+                </span>
+                <span className="slide-t"> No added sugars, no sweeteners</span>
+                <span className="slide-t">
+                  {" "}
+                  No colourants, no preservatives, no concentrates.
+                </span>
+                <span className="slide-t"> Funny we even mention it, no?</span>
+              </p>
+
+              <img
+                src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/6745c83eed8b5149d602d8b9_intro_img.avif"
+                loading="lazy"
+                alt=""
+                className="lemon_img"
+              />
+              <div className="blue-slide"></div>
+              <p className="product-text p2" style={{ color: "white" }}>
+                <span className="slide-t2"> Mission </span>
+                <span className="slide-t2">
+                  {" "}
+                  So this is the way you can stay hydrated
+                </span>
+                <span className="slide-t2">
+                  {" "}
+                  Healthily, all day, every day – feeling good
+                </span>
+                <span className="slide-t2">
+                  {" "}
+                  and doing good. At work, on the go,
+                </span>
+                <span className="slide-t2"> studying, or out for a walk.</span>
+              </p>
+              <img
+                src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/67cec30a33cd24573c03a349_letsdrinkharmless.svg"
+                loading="lazy"
+                alt=""
+                className="text-img"
+              />
+            </div>
+          </div>
+          {/* <div className="blue-slide">
           <p className="product-text">
             Mission <br></br>
             So this is the way you can stay hydrated<br></br>
@@ -344,6 +719,7 @@ const CharlieDrink = () => {
             alt=""
             class="lemon_img"
           />
+        </div> */}
         </div>
       </section>
 
@@ -440,6 +816,24 @@ const CharlieDrink = () => {
                         be recycled endlessly, boasting the world’….
                       </p>
                     </div>
+
+                    <div className="stepper-item">
+                      <div class="steps-upper">
+                        <div class="step_counter">03</div>
+                        <img
+                          src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/67cec10f089cd19966bf86d1_Recycle%20can.svg"
+                          loading="lazy"
+                          alt=""
+                          class="steps_img"
+                        />
+                      </div>
+                      <h3 class="step-item_title">Yes we can. Can!</h3>
+                      <p class="step-item_text">
+                        Cans, crafted from permanent aluminum, offer unique
+                        recycling advantages. Unlike plastic bottles, cans can
+                        be recycled endlessly, boasting the world’….
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -450,7 +844,7 @@ const CharlieDrink = () => {
       <section className="socials-section">
         <div className="container-large">
           <div className="products-header">
-            <h1>SOCIALS</h1>
+            <h1 className="h-socials">SOCIALS</h1>
             <div>
               <h4>INSTAGRAM</h4>
               <h4>TIKTOK</h4>
@@ -460,6 +854,7 @@ const CharlieDrink = () => {
         <div className="cd-slider-component">
           <div className="cd-slide">
             <img
+            className="zoom-img"
               width={536}
               height={635}
               src="https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/679ba94976f6357e69a72f5c_Scherm_afbeelding%202025-01-30%20om%2017.29.22.avif"
@@ -467,6 +862,7 @@ const CharlieDrink = () => {
           </div>
           <div className="cd-slide">
             <img
+               className="zoom-img"
               width={536}
               height={635}
               src="https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/679ba9214b0e009ffebd292d_Scherm_afbeelding%202025-01-30%20om%2017.29.10.avif"
@@ -474,6 +870,7 @@ const CharlieDrink = () => {
           </div>
           <div className="cd-slide">
             <img
+               className="zoom-img"
               width={536}
               height={635}
               src="https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/679a2b9503d0d67e3ae58400_Scherm%C2%ADafbeelding%202023-11-30%20om%2020.50.23.avif"
@@ -481,6 +878,7 @@ const CharlieDrink = () => {
           </div>
           <div className="cd-slide">
             <img
+               className="zoom-img"
               width={536}
               height={635}
               src="https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/679ba94976f6357e69a72f5c_Scherm_afbeelding%202025-01-30%20om%2017.29.22.avif"
