@@ -468,13 +468,13 @@ const CharlieDrink = () => {
     )
     .fromTo(
       ".zoom-img",
-      {scale:0.9},
+      {scale:1},
       {
-      scale:1,
+      scale:1.4,
         ease: "none",
         scrollTrigger: {
           trigger: ".zoom-img",
-          start: "top 50%",
+          start: "top bottom",
           
         scrub:"true",
         },
