@@ -384,7 +384,7 @@ const CharlieDrink = () => {
         start: "top 50%",
         end: "bottom top",
         scrub: true,
-        // markers: true,
+         markers: true,
       },
     });
 
@@ -419,7 +419,7 @@ const CharlieDrink = () => {
         scaleX: 18,
         scaleY: 18,
         scaleZ: 1,
-        ease: "power3.inOut",
+        ease: "power2.inOut",
         delay: 0.5,
       }
     );
@@ -433,34 +433,39 @@ const CharlieDrink = () => {
       "-=0.4"
     );
   }, []);
+
   //social section
   useEffect(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".socials-section",
-        start: "top 50% ",
+        start: "top 70% ",
+        delay: 1,
+   
+        toggleActions: "play reset play reset", 
 
-        markers: true,
       },
     });
     tl.fromTo(
       ".h-socials",
-      { y: 500 },
+      { y: 500,  },
       {
         y: 0,
-        duration: "0.4",
+        duration: "0.5",
+        
+    
       }
     )
  .fromTo(
       ".cd-slider-component",
       { x: 0 },
       {
-        x: "-15%", 
-        ease: "none",
+        x: "-20%", 
+        ease: "power2.inOut",
         scrollTrigger: {
           trigger: ".cd-slider-component",
           start: "top bottom",
-          end: "top 20%",
+          end: "bottom top",
           scrub: true,
           // markers: true,
         },
@@ -468,23 +473,85 @@ const CharlieDrink = () => {
     )
     .fromTo(
       ".zoom-img",
-      {scale:1},
+      {scale:1.2},
       {
-      scale:1.4,
+      scale:1,
         ease: "none",
         scrollTrigger: {
           trigger: ".zoom-img",
           start: "top bottom",
+          end: "top top",
           
         scrub:"true",
         },
-      }
-    );
-  }, []);
+      },"-=1"
+    )
 
+   
+
+  }, []);
+//footer
+useEffect(() => {
+
+  gsap.fromTo(
+    ".footer-para",
+    { y: 200 },
+    {
+      y: 0,
+  
+      scrollTrigger: {
+        trigger: ".cd-footer",
+        start: "top 50%",
+        stagger: 0.4,
+        toggleActions: "play reset play reset", 
+        duration:0.4,
+    
+      },
+    }
+  );
+
+  gsap.fromTo(
+    ".fg-r",
+    { scaleX:0.7, scaleY:0.7, rotateX:"10deg" },
+    {
+     
+      scaleX:1, scaleY:1, rotateZ:0,
+      scrollTrigger: {
+        trigger: ".cd-footer",
+        start: "top 80%",
+       
+        scrub:true,
+   
+    
+      },
+    }
+  );
+
+
+  gsap.fromTo(
+    ".footer-marquee",
+    { x: 0 },
+    {
+      x: "-25%", // move half the width left
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".footer-marquee",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        // markers: true,
+      },
+    }
+  );
+
+ 
+}, []);
+
+
+const [open,setOpen] = useState(false)
   return (
     <div ref={wrapperRef} bubbles="" className="charlie-drink">
-      <div className="charlie-drink-header">
+      <div className={`charlie-drink-header ${open && "headerOpen"}`}>
         <div className="h-top">
           <div className="circle">
             <img
@@ -495,14 +562,115 @@ const CharlieDrink = () => {
             ></img>
           </div>
           <img
+          className="cd-logo"
             src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/67cea500e52540fc4346f61b_Charlie%20organics.svg"
             alt="cd logo"
             width={160}
             height={68}
           ></img>
-          <button className="order-btn">ORDER</button>
+          <button onClick={()=>setOpen(!open)} style={{ background: open && "#22546e" }}
+ className="order-btn"><span>ORDER</span>
+          {!open ?
+         ( <svg className="toggle-svg"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 20 20"
+      width="20"
+      height="20"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <defs>
+        <clipPath id="__lottie_element_1526">
+          <rect width="20" height="20" x="0" y="0" />
+        </clipPath>
+        <clipPath id="__lottie_element_1539">
+          <path d="M0,0 L10,0 L10,2 L0,2z" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#__lottie_element_1526)">
+        <g transform="matrix(1,0,0,1,0,2.999999761581421)" opacity="1">
+          <path
+            fill="rgb(33,83,109)"
+            fillOpacity="1"
+            d="M20,1 C20,0.4481000006198883 19.55190086364746,0 19,0 C19,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 19,2 19,2 C19.55190086364746,2 20,1.551900029182434 20,1 C20,1 20,1 20,1z"
+          />
+        </g>
+        <g transform="matrix(1,0,0,1,0,15.000000953674316)" opacity="1">
+          <path
+            fill="rgb(33,83,109)"
+            fillOpacity="1"
+            d="M20,1 C20,0.4481000006198883 19.55190086364746,0 19,0 C19,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 19,2 19,2 C19.55190086364746,2 20,1.551900029182434 20,1 C20,1 20,1 20,1z"
+          />
+        </g>
+        <g
+          clipPath="url(#__lottie_element_1539)"
+          transform="matrix(1,0,0,1,0,9)"
+          opacity="1"
+        >
+          <g transform="matrix(1,0,0,1,0,0)" opacity="1">
+            <path
+              fill="rgb(33,83,109)"
+              fillOpacity="1"
+              d="M10,1 C10,0.4481000006198883 9.551899909973145,0 9,0 C9,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 9,2 9,2 C9.551899909973145,2 10,1.551900029182434 10,1 C10,1 10,1 10,1z"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>)
+    :
+   ( <svg
+    className="close-svg"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 20 20"
+  width="20"
+  height="20"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <defs>
+    <clipPath id="__lottie_element_1526">
+      <rect width="20" height="20" x="0" y="0" />
+    </clipPath>
+    <clipPath id="__lottie_element_1539">
+      <path d="M0,0 L10,0 L10,2 L0,2z" />
+    </clipPath>
+  </defs>
+  <g clipPath="url(#__lottie_element_1526)">
+    <g
+      transform="matrix(0.7071068286895752,0.7071067690849304,-0.7071067690849304,0.7071068286895752,3.6360387802124023,2.22182559967041)"
+      opacity="1"
+    >
+      <path
+        fill="rgb(255,255,255)"
+        fillOpacity="1"
+        d="M20,1 C20,0.4481 19.5519,0 19,0 C19,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 19,2 19,2 C19.5519,2 20,1.5519 20,1 C20,1 20,1 20,1z"
+      />
+    </g>
+    <g
+      transform="matrix(0.7071068286895752,-0.7071067690849304,0.7071067690849304,0.7071068286895752,2.221825122833252,16.36396026611328)"
+      opacity="1"
+    >
+      <path
+        fill="rgb(255,255,255)"
+        fillOpacity="1"
+        d="M20,1 C20,0.4481 19.5519,0 19,0 C19,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 19,2 19,2 C19.5519,2 20,1.5519 20,1 C20,1 20,1 20,1z"
+      />
+    </g>
+    <g clipPath="url(#__lottie_element_1539)" transform="matrix(1,0,0,1,0,9)" opacity="0">
+      <g transform="matrix(1,0,0,1,0,0)" opacity="1">
+        <path
+          fill="rgb(255,255,255)"
+          fillOpacity="1"
+          d="M10,1 C10,0.4481 9.5519,0 9,0 C9,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 9,2 9,2 C9.5519,2 10,1.5519 10,1 C10,1 10,1 10,1z"
+        />
+      </g>
+    </g>
+  </g>
+</svg>)
+}
+          </button>
         </div>
-        <div className="h-bottom">
+        <div className={`h-bottom ${open && "bottomHeader"}`}>
           <a href="">PRODUCTS</a>
           <a href="">OUR STORY</a>
           <a href="">FAQ</a>
@@ -893,8 +1061,9 @@ const CharlieDrink = () => {
             <div className="f-grid">
               <div className="fg-l">
                 <p>
-                  Enjoy the pure, organic taste of Charlie’s – no added sugars,
-                  no nonsense, just refreshment in a fully recyclable can
+                <span  className="footer-para">Enjoy the pure, organic taste of Charlie’s</span>
+  <span  className="footer-para">- no added sugars, no nonsense, just</span>
+  <span  className="footer-para">refreshment in a fully recyclable can</span>
                 </p>
                 <img
                   src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/6745ca6cec81ee7fac907794_drip.svg"
