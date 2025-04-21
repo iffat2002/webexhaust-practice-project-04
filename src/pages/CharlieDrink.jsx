@@ -343,7 +343,7 @@ const CharlieDrink = () => {
           start: "top bottom ",
           end: "top top ",
           scrub: true,
-          markers: true,
+          // markers: true,
         },
       }
     );
@@ -359,58 +359,217 @@ const CharlieDrink = () => {
           start: "top top ",
           end: "bottom 90% ",
           scrub: true,
-          markers: true,
+          // markers: true,
         },
       }
     );
   }, []);
 
   //colored slides
+  // useEffect(() => {
+  //   const isMobile = window.innerWidth <= 990; // adjust as needed
+ 
+  //   gsap.to(".yellow-slide", {
+  //     scaleX: "0.7",
+  //     rotate: "-4deg",
+  //     scrollTrigger: {
+  //       trigger: ".colored-slides",
+  //       start: "bottom 95%",
+  //       willChange:"transform, width, height",
+  //       end: "bottom top",
+  //       scrub: true,
+  //       // markers: true,
+  //     },
+  //   });
+
+  //   const tl = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: ".yellow-slide",
+  //       start: "top 50%",
+  //       end: "bottom top",
+  //       scrub: true,
+    
+  //        markers: true,
+  //     },
+  //   });
+
+  //   tl.fromTo(
+  //     ".yellow-slide",
+  //     // { width: "80%", height: "80%" },
+  //     {     scaleX: 0.9,
+  //       scaleY: 0.9,
+  //       scaleZ: 0.9,},
+  //     {
+  //       scaleX: 1.1,
+  //       scaleY: 1.1,
+  //       scaleZ: 1,
+  //       // height: "100vh",
+  //       // width: "100vw",
+  //       ease: "none",
+  //       duration: 2,
+  //     }
+  //   ).fromTo(
+  //     ".slide-t",
+  //     { clipPath: "inset(100% 0% 0% 0%)" }, // fully hidden from bottom
+  //     { clipPath: "inset(0% 0% 0% 0%)", ease: "none", },
+  //      isMobile ? "-=2" : "-=1"
+  //   )
+  //   tl.fromTo(
+  //     ".lemon_img",
+  //     { scaleX: 0, scaleY: 0 },
+  //     { scaleX: 1, scaleY: 1 },
+  //    isMobile ? "-=1.5" : "-=0.4"
+  //   );
+  //   tl.fromTo(
+  //     ".blue-slide",
+  //     { scaleX: 0, scaleY: 0 },
+  //     {
+  //       scaleX: 18,
+  //       scaleY: 18,
+  //       scaleZ: 1,
+  //       ease: "power2.inOut",
+  //       delay: 0.5,
+  //     },
+  //   );
+  //   tl.to(".lemon_img", { scaleX: 0, scaleY: 0 }, "-=0.4");
+  //   tl.fromTo(".text-img", { y: 300 }, { y: 0, ease: "power2.inOut" }, "-=0.4");
+  //   tl.set(".p1", { display: "none" }, "-=0.4");
+  //   tl.set(".p2", { display: "flex" }, "-=0.4").fromTo(
+  //     ".slide-t2",
+  //     { clipPath: "inset(100% 0% 0% 0%)" },
+  //     { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
+  //     "-=0.4"
+  //   );
+  // }, []);
+
   useEffect(() => {
-    gsap.to(".yellow-slide", {
-      scaleX: "0.7",
-      rotate: "-4deg",
-      scrollTrigger: {
-        trigger: ".colored-slides",
-        start: "bottom 95%",
-        end: "bottom top",
-        scrub: true,
-        // markers: true,
-      },
-    });
+    // Check if mobile (including tablet portrait)
+    const isMobile = window.innerWidth <= 990 || 
+                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Common animation elements
+    const yellowSlide = gsap.utils.toArray(".yellow-slide")[0];
+    const coloredSlides = document.querySelector(".colored-slides");
+    
+    // Set initial styles based on device
+    if (isMobile) {
+      gsap.set(".colored-slides", { height: "300vh" });
+      gsap.set(".yellow-slide", { 
+        // padding: "5rem 2rem",
+        // clipPath: "none",
+        // borderRadius: "0"
+      });
+    }
+    if(isMobile){
+    const tl2 = gsap.timeline({ scrollTrigger: {
+      trigger: ".yellow-slide",
+      start: "top 50%",
+      end: "bottom top",
+      scrub: true,
+    }, });
+    tl2.fromTo(".yellow-slide",
+      { scaleX: 0.9, scaleY: 0.9, scaleZ: 1 },
+      { scaleX: 1.1, scaleY:1.1, scaleZ:1, ease: "none", duration: 2, }
+    )
+    .fromTo(".slide-t",
+      { clipPath: "inset(100% 0% 0% 0%)" },
+      { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
+      isMobile ? "-=2" : "-=1"
+    )
+      
+  .fromTo(".lemon_img",
+      { scale: 0 },
+      { scale: 1 },"-=2"
+  
+    )
+  .to(".lemon_img", 
+      { scale: 0, duration: 1}, 
+   isMobile && "-=1"
+    )
+  
+  .fromTo(".blue-slide",
+      { scale: 0 },
+      { scale: isMobile ? 4 : 18, ease: "power2.inOut" },
+      isMobile ? "-=01" : "-=0.4"
+    )
+    // .to(".lemon_img", 
+    //   { scale: 0 }, 
+    //   "-=0.4"
+    // )
+    .fromTo(".text-img", 
+      { y: 300 }, 
+      { y: 0, ease: "power2.inOut" , delay:1}
+      ,isMobile ? "-=1.6" : "-=0.4"
+    )
+    // .set(".p1", 
+    //   { display: "none" }
+    //   ,isMobile ? "-=0.5" : "-=0.4"
+    // )
+    .to(".p2", 
+      { display: "flex", position:"absolute", }
+,isMobile ? "" : "-=0.4"
+    )
+    .fromTo(".slide-t2",
+      { clipPath: "inset(100% 0% 0% 0%)" },
+      { clipPath: "inset(0% 0% 0% 0%)", ease: "none",delay:1.1 },
+     isMobile ? "" : "-=0.4"
+    );
+  }
+    // Desktop-specific animations
+    
+      gsap.to(".yellow-slide", {
+        scaleX: "0.7",
+        rotate: "-4deg",
+        scrollTrigger: {
+          trigger: ".colored-slides",
+          start: "bottom 95%",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+
+    // Main timeline for both devices
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: ".yellow-slide",
-        start: "top 50%",
-        end: "bottom top",
+        trigger: isMobile ? ".colored-slides" : ".yellow-slide",
+        start: isMobile ? "top top" : "top 50%",
+        end: isMobile ? "+=200%" : "bottom top",
         scrub: true,
-         markers: true,
-      },
+        pin: isMobile,
+       
+        markers: false,
+      }
     });
 
+    // Animation sequence
+   if(!isMobile) {
     tl.fromTo(
       ".yellow-slide",
-      { width: "80%", height: "80%" },
+      // { width: "80%", height: "80%" },
+      {     scaleX: 0.9,
+        scaleY: 0.9,
+        scaleZ: 0.9,},
       {
         scaleX: 1.1,
         scaleY: 1.1,
         scaleZ: 1,
-        height: "100vh",
-        width: "100vw",
+        // height: "100vh",
+        // width: "100vw",
         ease: "none",
         duration: 2,
       }
     ).fromTo(
       ".slide-t",
       { clipPath: "inset(100% 0% 0% 0%)" }, // fully hidden from bottom
-      { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
-      "-=1"
-    );
+      { clipPath: "inset(0% 0% 0% 0%)", ease: "none", },
+       isMobile ? "-=2" : "-=1"
+    )
     tl.fromTo(
       ".lemon_img",
       { scaleX: 0, scaleY: 0 },
       { scaleX: 1, scaleY: 1 },
-      "-=0.4"
+     isMobile ? "-=1.5" : "-=0.4"
     );
     tl.fromTo(
       ".blue-slide",
@@ -421,7 +580,7 @@ const CharlieDrink = () => {
         scaleZ: 1,
         ease: "power2.inOut",
         delay: 0.5,
-      }
+      },
     );
     tl.to(".lemon_img", { scaleX: 0, scaleY: 0 }, "-=0.4");
     tl.fromTo(".text-img", { y: 300 }, { y: 0, ease: "power2.inOut" }, "-=0.4");
@@ -432,9 +591,21 @@ const CharlieDrink = () => {
       { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
       "-=0.4"
     );
+    
+   }
+
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      tl.kill();
+    };
   }, []);
 
-  //social section
+  
+  
+  
+    //social section
   useEffect(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -872,6 +1043,7 @@ const [open,setOpen] = useState(false)
                 className="text-img"
               />
             </div>
+            
           </div>
           {/* <div className="blue-slide">
           <p className="product-text">
