@@ -48,7 +48,7 @@ const CharlieDrink = () => {
       canImg:
         "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/6745a09f7810e476037a3cc2_Charlies%20Organics%20330ml%20Can%20Grapefruit.avif",
       splashBg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd39afdc91f5b02a248b2_3.avif",
+        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd3a9c1e5b9e20004bcc8_9.avif",
       bgColor: "#ecb1be",
       name: "Grapefruit",
     },
@@ -57,7 +57,7 @@ const CharlieDrink = () => {
       canImg:
         "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/66dad9f9da8ca070ebd27542_Charlies%20Organics%20330ml%20Can%20Lemon.avif",
       splashBg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd39afdc91f5b02a248b2_3.avif",
+        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd3b037d0fa566a22528e_10.avif",
       bgColor: "hsla(195.45454545454547, 57.89%, 77.65%, 1.00)",
       name: "Lemon",
     },
@@ -181,35 +181,32 @@ const CharlieDrink = () => {
   useEffect(() => {
     const container = containerRef.current;
     const circle = circleRef.current;
-
-    const circleSize = 120; // must match CSS width/height
-
+  
+    const circleSize = 120; // Must match CSS
+  
+    const rect = container.getBoundingClientRect();
+  
+    //  Set the initial position to center
+    gsap.set(circle, {
+      x: rect.width * 0.7 - circleSize / 2,
+      y: rect.height * 0.8 - circleSize / 2,
+    });
     const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
       const rawX = e.clientX - rect.left;
       const rawY = e.clientY - rect.top;
-
-      // Clamp position so circle stays fully inside container
-      const x = Math.max(
-        circleSize / 2,
-        Math.min(rawX, rect.width - circleSize / 2)
-      );
-      const y = Math.max(
-        circleSize / 2,
-        Math.min(rawY, rect.height - circleSize / 2)
-      );
-
+  
+      const x = Math.max(circleSize / 2, Math.min(rawX, rect.width - circleSize / 2));
+      const y = Math.max(circleSize / 2, Math.min(rawY, rect.height - circleSize / 2));
+  
       gsap.to(circle, {
         x: x - circleSize / 2,
         y: y - circleSize / 2,
         duration: 0.6,
-
         ease: "none",
       });
     };
-
+  
     container.addEventListener("mousemove", handleMouseMove);
-
     return () => {
       container.removeEventListener("mousemove", handleMouseMove);
     };
@@ -299,7 +296,7 @@ const CharlieDrink = () => {
       ease: "power3.out",
     });
   };
-
+  const isMobile = window.innerWidth <= 990;
   //marquee section + info section
   useEffect(() => {  const isMobile = window.innerWidth <= 990;
 
@@ -640,7 +637,7 @@ const CharlieDrink = () => {
     });
     tl.fromTo(
       ".h-socials",
-      { y: 500,  },
+      { y: 200,  },
       {
         y: 0,
         duration: "0.5",
@@ -762,7 +759,47 @@ const handleClick = (id) => {
     el.scrollIntoView({ behavior: "smooth" });
   }
 };
+const textRefs = useRef([]);
+ 
+const btnHover = (index) => {
+  const textRef = textRefs.current[index];
+  if (textRef) {
+    gsap.timeline()
+      .to(textRef, {
+        y: -20,
+        duration: 0.2,
+        ease: "power2.in",
+      })
+      .set(textRef, { y: 20 })
+      .to(textRef, {
+        y: 0,
+        duration: 0.2,
+        ease: "power2.out",
+      });
+  }
+};
+const logoHover = () => {
+  
 
+
+      gsap.fromTo(".cd-logo", 
+     
+       { skewX: 25,skewY: 15,},
+       { skewX: 0,skewY: 0,  ease: "none", duration:0.3}
+  
+  )
+}
+
+const btnUnhover = (index) => {
+  const textRef = textRefs.current[index];
+  if (textRef) {
+    gsap.to(textRef, {
+      y: 0,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  }
+};
   return (
     <div ref={wrapperRef} bubbles="" className="charlie-drink">
       <div className={`charlie-drink-header ${open && "headerOpen"}`}>
@@ -781,9 +818,10 @@ const handleClick = (id) => {
             alt="cd logo"
             width={160}
             height={68}
+            onMouseEnter={logoHover}
           ></img>
-          <button onClick={()=>setOpen(!open)} style={{ background: open && "#22546e" }}
- className="order-btn"><span>ORDER</span>
+          <button onClick={()=> { isMobile && setOpen(!open)}} style={{ background: open && "#22546e" }}
+ className="order-btn" onMouseEnter={()=>btnHover(0)}  onMouseLeave={()=>btnUnhover(0)}><span ref={(el) => (textRefs.current[0] = el)}>ORDER</span>
           {!open ?
          ( <svg className="toggle-svg"
       xmlns="http://www.w3.org/2000/svg"
@@ -1132,7 +1170,7 @@ const handleClick = (id) => {
                 alt=""
                 class="info_drip"
               />
-              <button className="order-btn-blue">ORDER NOW</button>
+              <button className="order-btn-blue" onMouseEnter={()=>btnHover(1)}  onMouseLeave={()=>btnUnhover(1)}><span ref={(el) => (textRefs.current[1] = el)}>ORDER NOW</span></button>
             </div>
             <div className="drop-mask">
               <img
