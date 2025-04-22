@@ -301,7 +301,8 @@ const CharlieDrink = () => {
   };
 
   //marquee section + info section
-  useEffect(() => {
+  useEffect(() => {  const isMobile = window.innerWidth <= 990;
+
     //info
     gsap.fromTo(
       ".info_text-wrapper",
@@ -331,6 +332,7 @@ const CharlieDrink = () => {
       }
     );
     //cards slide up
+    if(!isMobile){
     const tl = gsap.timeline({});
     tl.fromTo(
       ".step-mask",
@@ -341,6 +343,7 @@ const CharlieDrink = () => {
         scrollTrigger: {
           trigger: ".steps-section",
           start: "top bottom ",
+   
           end: "top top ",
           scrub: true,
           // markers: true,
@@ -363,6 +366,7 @@ const CharlieDrink = () => {
         },
       }
     );
+  }
   }, []);
 
   //colored slides
@@ -489,7 +493,7 @@ const CharlieDrink = () => {
   
   .fromTo(".blue-slide",
       { scale: 0 },
-      { scale: isMobile ? 4 : 18, ease: "power2.inOut" },
+      { scale: isMobile ? 10 : 18, ease: "power2.inOut" },
       isMobile ? "-=01" : "-=0.4"
     )
     // .to(".lemon_img", 
@@ -537,7 +541,7 @@ const CharlieDrink = () => {
         end: isMobile ? "+=200%" : "bottom top",
         scrub: true,
         pin: isMobile,
-       
+       pinSpacing:false,
         markers: false,
       }
     });
@@ -594,7 +598,7 @@ const CharlieDrink = () => {
     
    }
 
-
+ 
     // Cleanup function
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -607,6 +611,23 @@ const CharlieDrink = () => {
   
     //social section
   useEffect(() => {
+    const isMobile = window.innerWidth <= 990;
+    const isLg = window.innerWidth > 1000 && window.innerWidth < 1442;
+  
+    if(isLg){
+      gsap.to(".stepper-wrapper", {
+       scrollTrigger: {
+         trigger: ".steps-section",
+         start: "top top",
+         end: "bottom bottom", // or "bottom top" depending on how long you want the pin
+         scrub: true,
+         pin: true,
+         pinSpacer: false,
+         pinSpacing: false,
+         // markers: true, // for debugging
+       },
+     });
+      }
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".socials-section",
@@ -631,7 +652,7 @@ const CharlieDrink = () => {
       ".cd-slider-component",
       { x: 0 },
       {
-        x: "-20%", 
+        x: isMobile ? "-5%" : "-20%", 
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: ".cd-slider-component",
@@ -663,6 +684,8 @@ const CharlieDrink = () => {
   }, []);
 //footer
 useEffect(() => {
+  const isMobile = window.innerWidth <= 990;
+
 
   gsap.fromTo(
     ".footer-para",
@@ -703,7 +726,7 @@ useEffect(() => {
     ".footer-marquee",
     { x: 0 },
     {
-      x: "-25%", // move half the width left
+      x: isMobile ? "50%" :  "-25%", // move half the width left
       ease: "none",
       scrollTrigger: {
         trigger: ".footer-marquee",
@@ -720,6 +743,26 @@ useEffect(() => {
 
 
 const [open,setOpen] = useState(false)
+//toggle header
+useEffect(() => {
+  if (open) {
+    gsap.fromTo(
+      ".headerOpen",
+      { y: "-100%", opacity: 0 },
+      { y: "0%", opacity: 1, duration: 0.6, ease: "power2.out" }
+    );
+  }
+}, [open]);
+const [activeLink, setActiveLink] = useState("");
+
+const handleClick = (id) => {
+  setActiveLink(id);
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
   return (
     <div ref={wrapperRef} bubbles="" className="charlie-drink">
       <div className={`charlie-drink-header ${open && "headerOpen"}`}>
@@ -842,11 +885,21 @@ const [open,setOpen] = useState(false)
           </button>
         </div>
         <div className={`h-bottom ${open && "bottomHeader"}`}>
-          <a href="">PRODUCTS</a>
-          <a href="">OUR STORY</a>
-          <a href="">FAQ</a>
-          <a href="">CONTACT</a>
-          <a href="">ORDER</a>
+          <a  href="#"
+        className={activeLink === "products" ? "active" : ""}
+        onClick={() => handleClick("products")}>PRODUCTS</a>
+          <a  href="#"
+        className={activeLink === "our-story" ? "active" : ""}
+        onClick={() => handleClick("our-story")}>OUR STORY</a>
+          <a  href="#"
+        className={activeLink === "faq" ? "active" : ""}
+        onClick={() => handleClick("faq")}>FAQ</a>
+          <a  href="#"
+        className={activeLink === "contact" ? "active" : ""}
+        onClick={() => handleClick("contact")}>CONTACT</a>
+          <a  href="#"
+        className={activeLink === "order" ? "active" : ""}
+        onClick={() => handleClick("order")}>ORDER</a>
         </div>
       </div>
       <section className="cd-hero">
@@ -883,7 +936,7 @@ const [open,setOpen] = useState(false)
         </div>
       </section>
 
-      <section className="cd-products">
+      <section id="products" className="cd-products">
         <div className="products-header">
           <h1>PRODUCTS</h1>
           <div>
@@ -995,7 +1048,7 @@ const [open,setOpen] = useState(false)
         </div>
       </section>
 
-      <section className="colored-slides">
+      <section id="our-story" className="colored-slides">
         <div className="sticky-slide">
           <div className="mask-slide">
             <div className="yellow-slide">
@@ -1079,7 +1132,7 @@ const [open,setOpen] = useState(false)
                 alt=""
                 class="info_drip"
               />
-              <button className="order-btn blue">ORDER NOW</button>
+              <button className="order-btn-blue">ORDER NOW</button>
             </div>
             <div className="drop-mask">
               <img
@@ -1104,7 +1157,7 @@ const [open,setOpen] = useState(false)
                 <div class="steps_title-wrapper">
                   <div class="steps_label">WIIF the planet?</div>
                   <h2 class="steps_title">
-                    Charlie wants her<br></br> to stay pretty as<br></br> well
+                    Charlie wants her to stay pretty as well
                   </h2>
                   <a href="/store-finder" class="steps_button w-inline-block">
                     <div class="steps_button-circle">
