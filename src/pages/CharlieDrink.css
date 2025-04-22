@@ -758,7 +758,13 @@ flex-direction: column;
    transition-duration: .1s;
    transition-timing-function: ease;
 }
-
+.f-links{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+}
 @media screen and (max-width: 1450px) {
     html{
     overflow-x: hidden ;
@@ -958,6 +964,12 @@ padding: 0rem 1rem;
 
 
   @media screen and (max-width: 767px) {
+    .f-links{
+        padding-top: 1rem;
+        gap: 0px 25px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
     .steps_label{
         font-size:1rem
     }

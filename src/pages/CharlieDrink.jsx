@@ -1377,6 +1377,12 @@ const btnUnhover = (index) => {
               />
               <div class="footer_marquee-text">Follow us</div>
             </div>
+
+            <div className="f-links"><span>©2025</span>
+            <span>  Privacyvoorwaarden</span>
+            <span>Actievoorwaarden</span>
+            <img src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/674dd520260b1fb9027e22e2_heart.svg" width={145} height={32} alt ="f text"></img>
+            </div>
           </div>
         </div>
       </section>
