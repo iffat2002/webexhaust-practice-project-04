@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./harison.css";
 import gsap from "gsap";
 import harison from "../images/harison.avif";
@@ -109,6 +109,9 @@ const Harison = () => {
         { scaleX: 1, transformOrigin: "center center" }
       );
   }, []);
+ 
+ 
+ 
   const itemRef = useRef(null);
   const borderRef = useRef(null);
 
@@ -198,6 +201,12 @@ const Harison = () => {
       
       });
     };
+
+
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => setMenuOpen(!menuOpen);
+  
   return (
     <div ref={pageRef} style={{background:"white"}}>
      
@@ -232,11 +241,34 @@ const Harison = () => {
                 </p>
               )
             )}
+           <p className="menu-tag" onClick={toggleMenu}> {menuOpen ? 'Close' : 'Menu'}</p>
           </div>
 
           </div>
         </div>
       </header>
+
+
+      {menuOpen && (
+        <div className="overlay-menu">
+          <div className="left-links">
+            <p>Work</p>
+            <p>Archive</p>
+            <p>Studio</p>
+            <p>Press</p>
+            <p>Contact</p>
+            <p>Purchase</p>
+          </div>
+          <div className="right-links">
+            <p><strong>Instagram</strong></p>
+            <p>Twitter</p>
+            <p>LinkedIn</p>
+            <p>Dribbble</p>
+          </div>
+        </div>
+      )}
+
+
     <div>
     
 
@@ -250,6 +282,7 @@ const Harison = () => {
               width={1452}
               height={236}
             />
+           
             <img
               src={harison}
               className="harison logo-bottom1"
@@ -268,6 +301,7 @@ const Harison = () => {
               width={1452}
               height={236}
             />
+           
           </div>
           <p className="hero-text">
             Independent designer based in Germany, working globally, and
