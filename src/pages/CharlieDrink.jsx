@@ -1324,7 +1324,7 @@ const btnUnhover = (index) => {
             <div className="f-grid">
               <div className="fg-l">
                 <p>
-                <span  className="footer-para">Enjoy the pure, organic taste of Charlie’s</span>
+                <span  className="footer-para">Enjoy the pure, organic taste of Charlie’s </span>
   <span  className="footer-para">- no added sugars, no nonsense, just</span>
   <span  className="footer-para">refreshment in a fully recyclable can</span>
                 </p>
@@ -1343,6 +1343,14 @@ const btnUnhover = (index) => {
               ></img>
             </div>
 
+
+<div className="f-nav-items">
+  <span>PRODUCTS</span>
+  <span>OUR STORY</span>
+  <span>FAQ</span>
+  <span>CONTACT</span>
+  <span>ORDER</span>
+</div>
             <div class="footer-marquee">
               <img
                 src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/6745c83eed8b5149d602d8b9_intro_img.avif"

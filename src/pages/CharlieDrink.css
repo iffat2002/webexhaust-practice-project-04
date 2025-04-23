@@ -1018,7 +1018,19 @@ height:600px !important;
 
  
 }
+.f-nav-items{
+    display:none;
+}
 @media screen and (max-width: 600px) {
+    .f-nav-items{
+        padding-top: 1.7rem;
+        display:flex;
+        flex-direction: column;
+        font-weight:600;
+        align-items: flex-start;
+        gap:16px;
+        font-size: 1.1rem;
+    }
     .cd-slide{
         width: 19rem;
         height: 24rem;
@@ -1051,8 +1063,33 @@ height:600px !important;
         width: 154px;
         height: 154px;
     } 
-    .slide-t,.slide-t2{
+    .slide-t{
         font-size: 1.5rem;
   
     }
+.slide-t2{
+        font-size: 1.2rem;
+}
+        .steps_title{
+        font-size: 2rem;
+        }
+
+        .f-links{
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: 1rem;;
+            gap:
+            16px;
+         
+        }
+        .fg-l p {
+            display: inline-block;
+        }
+        .f-links img{
+        
+                width: 278px;
+                height: 63px;
+      
+        }
+    
 }
