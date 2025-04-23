@@ -430,7 +430,7 @@ z-index: 10;
     height: fit-content;
 }
 .steps-section{
-    height: 300vh;
+    height: 200vh;
     padding-bottom: 6.875rem;
     position: relative;
 }
@@ -534,7 +534,7 @@ z-index: 10;
     flex-flow: column;
     justify-content: flex-end;
     align-items: stretch;
-    max-width: 40rem;
+    max-width: 45rem;
     max-height: 80vh;
     padding: 3.125rem 2.5rem;
     display: flex
@@ -772,6 +772,17 @@ flex-direction: column;
 .products-header{
     padding: 0 1rem;
 }
+.cd-products{
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+       
+}
+.cd-product{
+    padding-left:0;
+    padding-right:0;
+    min-width: 20.6rem;
+}
 .product-cards{
     flex-direction: row;
     flex-wrap: nowrap;
@@ -861,13 +872,7 @@ height:240px
     padding: 4rem 0rem;
 
 }
-.products-header{
-flex-direction: column;
-padding: 0rem 1rem;
-}
-.cans, .bottles{
-    width:48%;
-}
+
 
 .marquee-section {
     margin-top: -3rem;
@@ -913,8 +918,9 @@ padding: 0rem 1rem;
     justify-content: flex-start;
 
 }
-.slide-t{
-    font-size: 1.5rem;
+.slide-t,.slide-t2{
+    /* font-size: 1.5rem; */
+    font-size: 2rem;
 }
 /* .mask-slide,.sticky-slide, .yellow-slide{
     height:100%;
@@ -960,32 +966,35 @@ padding: 0rem 1rem;
     flex-direction: column-reverse;
     align-items: center;
 }
+.cd-product{
+    min-width: 19.6rem;
+    padding-left: 0;
+    padding-right: 0;
+}
   }
+  @media screen and (min-width: 768px) {
+    .hero-center img{
+width:600px !important;
+height:600px !important;
+  }
+  .cd-hero-video{
+    width:100%;
+    height:100%;
+  }}
 
-
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
+    .cd-hero-video{
+        width:100%;
+        height:100%;
+      }
+   
     .f-links{
         padding-top: 1rem;
         gap: 0px 25px;
         justify-content: center;
         flex-wrap: wrap;
     }
-    .steps_label{
-        font-size:1rem
-    }
-    .step-item_title{
-        font-size: 32px;
-    }
-    .step-item_text{
-        font-size: 18px;
-    }
-    .step_counter{
-        font-size: 50px;
-    }
-    .steps_img{
-        width: 154px;
-        height: 154px;
-    }
+  
     .cd-product{
         min-width: 19.5rem;
         padding: 3rem 2.5rem;
@@ -1005,14 +1014,45 @@ padding: 0rem 1rem;
     .info_drip{
         inset: -0.5rem auto auto 0
     }
+ 
+
+ 
+}
+@media screen and (max-width: 600px) {
     .cd-slide{
         width: 19rem;
         height: 24rem;
-    }
-    .info-grid{
+    } 
+        .info-grid{
         display: flex;
         flex-direction: column-reverse;
     }
+    .products-header{
+        flex-direction: column;
+        padding: 0rem 1rem;
+        }
+        .cans, .bottles{
+            width:48%;
+        }
 
+          .steps_label{
+        font-size:1rem
+    }
+    .step-item_title{
+        font-size: 32px;
+    }
+    .step-item_text{
+        font-size: 18px;
+    }
+    .step_counter{
+        font-size: 50px;
+    }
+    .steps_img{
+        width: 154px;
+        height: 154px;
+    } 
+    .slide-t,.slide-t2{
+        font-size: 1.5rem;
   
+    }
 }
