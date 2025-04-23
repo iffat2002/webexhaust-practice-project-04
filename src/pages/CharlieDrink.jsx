@@ -5,67 +5,68 @@ import hero from "../hero.png";
 import "./CharlieDrink.css";
 
 gsap.registerPlugin(ScrollTrigger);
-const CharlieDrink = () => {
-  const products = [
-    {
-      id: 1,
-      canImg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/6745a05384ef1bcfb3f5a3bd_Charlies%20Organics%20330ml%20Can%20Black%20Currant.avif",
-      splashBg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd38b3d902e72d8ed92e6_1.avif",
-      bgColor: " #a19bd9",
-      name: "Cassis",
-    },
-    {
-      id: 2,
-      canImg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/6745a009e86eb7e0cb4d45e8_Charlies%20Organics%20330ml%20Can%20Passionfruit.avif",
-      splashBg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd393fce26526cd14b91d_2.avif",
-      bgColor: "#f7d064",
-      name: "Passionfruit",
-    },
-    {
-      id: 3,
-      canImg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/66dae210037e3f34eaf3eb57_Charlies%20Organics%20330ml%20Can%20Orange%20Mandarin%20Orange%20HR.avif",
-      splashBg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd39afdc91f5b02a248b2_3.avif",
-      bgColor: "hsla(23.368421052631586, 84.07%, 77.84%, 1.00)",
-      name: "Orange & Mandarin",
-    },
-    {
-      id: 4,
-      canImg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/66dae1d7e2fdbb07d0b4eeca_Charlies%20Organics%20330ml%20Can%20Raspberry%20%26%20Lime.avif",
-      splashBg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd3a115d5d982e77c61f3_8.avif",
-      bgColor: "#c3d250",
-      name: "Raspberry & Lime",
-    },
-    {
-      id: 5,
-      canImg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/6745a09f7810e476037a3cc2_Charlies%20Organics%20330ml%20Can%20Grapefruit.avif",
-      splashBg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd3a9c1e5b9e20004bcc8_9.avif",
-      bgColor: "#ecb1be",
-      name: "Grapefruit",
-    },
-    {
-      id: 6,
-      canImg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/66dad9f9da8ca070ebd27542_Charlies%20Organics%20330ml%20Can%20Lemon.avif",
-      splashBg:
-        "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd3b037d0fa566a22528e_10.avif",
-      bgColor: "hsla(195.45454545454547, 57.89%, 77.65%, 1.00)",
-      name: "Lemon",
-    },
-  ];
-  const stepperRef = useRef(null);
+const products = [
+  {
+    id: 1,
+    canImg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/6745a05384ef1bcfb3f5a3bd_Charlies%20Organics%20330ml%20Can%20Black%20Currant.avif",
+    splashBg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd38b3d902e72d8ed92e6_1.avif",
+    bgColor: " #a19bd9",
+    name: "Cassis",
+  },
+  {
+    id: 2,
+    canImg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/6745a009e86eb7e0cb4d45e8_Charlies%20Organics%20330ml%20Can%20Passionfruit.avif",
+    splashBg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd393fce26526cd14b91d_2.avif",
+    bgColor: "#f7d064",
+    name: "Passionfruit",
+  },
+  {
+    id: 3,
+    canImg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/66dae210037e3f34eaf3eb57_Charlies%20Organics%20330ml%20Can%20Orange%20Mandarin%20Orange%20HR.avif",
+    splashBg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd39afdc91f5b02a248b2_3.avif",
+    bgColor: "hsla(23.368421052631586, 84.07%, 77.84%, 1.00)",
+    name: "Orange & Mandarin",
+  },
+  {
+    id: 4,
+    canImg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/66dae1d7e2fdbb07d0b4eeca_Charlies%20Organics%20330ml%20Can%20Raspberry%20%26%20Lime.avif",
+    splashBg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd3a115d5d982e77c61f3_8.avif",
+    bgColor: "#c3d250",
+    name: "Raspberry & Lime",
+  },
+  {
+    id: 5,
+    canImg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/6745a09f7810e476037a3cc2_Charlies%20Organics%20330ml%20Can%20Grapefruit.avif",
+    splashBg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd3a9c1e5b9e20004bcc8_9.avif",
+    bgColor: "#ecb1be",
+    name: "Grapefruit",
+  },
+  {
+    id: 6,
+    canImg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/66dad9f9da8ca070ebd27542_Charlies%20Organics%20330ml%20Can%20Lemon.avif",
+    splashBg:
+      "https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/674dd3b037d0fa566a22528e_10.avif",
+    bgColor: "hsla(195.45454545454547, 57.89%, 77.65%, 1.00)",
+    name: "Lemon",
+  },
+];
 
+const CharlieDrink = () => {
+
+  const stepperRef = useRef(null);
   const wrapperRef = useRef(null);
-  //bubbles
+  //bubbles cursor
   useEffect(() => {
     const introWrapper = wrapperRef.current;
 
@@ -144,6 +145,7 @@ const CharlieDrink = () => {
   ]);
   const [bgIndex, setBgIndex] = useState(0);
 
+  //tap click
   const handleTap = () => {
     const nextIndex = (bgIndex + 1) % HeroBg.length;
     const container = containerRef.current;
@@ -181,11 +183,11 @@ const CharlieDrink = () => {
   useEffect(() => {
     const container = containerRef.current;
     const circle = circleRef.current;
-  
-    const circleSize = 120; // Must match CSS
-  
+
+    const circleSize = 120; 
+
     const rect = container.getBoundingClientRect();
-  
+
     //  Set the initial position to center
     gsap.set(circle, {
       x: rect.width * 0.7 - circleSize / 2,
@@ -194,10 +196,16 @@ const CharlieDrink = () => {
     const handleMouseMove = (e) => {
       const rawX = e.clientX - rect.left;
       const rawY = e.clientY - rect.top;
-  
-      const x = Math.max(circleSize / 2, Math.min(rawX, rect.width - circleSize / 2));
-      const y = Math.max(circleSize / 2, Math.min(rawY, rect.height - circleSize / 2));
-  
+
+      const x = Math.max(
+        circleSize / 2,
+        Math.min(rawX, rect.width - circleSize / 2)
+      );
+      const y = Math.max(
+        circleSize / 2,
+        Math.min(rawY, rect.height - circleSize / 2)
+      );
+
       gsap.to(circle, {
         x: x - circleSize / 2,
         y: y - circleSize / 2,
@@ -205,14 +213,14 @@ const CharlieDrink = () => {
         ease: "none",
       });
     };
-  
+
     container.addEventListener("mousemove", handleMouseMove);
     return () => {
       container.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-  //hero float
+  //hero container
   const videoRef = useRef(null);
   const imageRef = useRef(null);
   const centerImgRef = useRef(null);
@@ -225,11 +233,10 @@ const CharlieDrink = () => {
       const x = e.clientX - left;
       const y = e.clientY - top;
 
-      // Normalize between -1 and 1
       const offsetX = (x / width - 0.5) * 2;
       const offsetY = (y / height - 0.5) * 2;
 
-      const moveAmount = 15; // Adjust for stronger/weaker float
+      const moveAmount = 15; 
 
       gsap.to([videoRef.current, imageRef.current, centerImgRef.current], {
         x: offsetX * moveAmount,
@@ -262,14 +269,12 @@ const CharlieDrink = () => {
   const canImgRef = useRef([]);
   const bgRef = useRef([]);
 
-  // Initialize refs for each product based on the products length
   useEffect(() => {
     productRef.current = productRef.current.slice(0, products.length);
     canImgRef.current = canImgRef.current.slice(0, products.length);
     bgRef.current = bgRef.current.slice(0, products.length);
   }, [products.length]);
-
-  // Hover animation on mouse enter
+//product card mouse enter
   const onEnter = (index) => {
     gsap.to(bgRef.current[index], {
       scale: 1.1,
@@ -282,8 +287,7 @@ const CharlieDrink = () => {
       ease: "power2.out",
     });
   };
-
-  // Hover animation on mouse leave
+//product card mouse leave
   const onLeave = (index) => {
     gsap.to(bgRef.current[index], {
       scale: 1,
@@ -297,10 +301,11 @@ const CharlieDrink = () => {
     });
   };
   const isMobile = window.innerWidth <= 990;
-  //marquee section + info section
-  useEffect(() => {  const isMobile = window.innerWidth <= 990;
 
-    //info
+  //marquee section + info section + steps section
+  useEffect(() => {
+    
+    //info section
     gsap.fromTo(
       ".info_text-wrapper",
       { y: 200 },
@@ -312,12 +317,13 @@ const CharlieDrink = () => {
         },
       }
     );
-    //marquee
+
+    //marquee section
     gsap.fromTo(
       ".m-list",
       { x: 0 },
       {
-        x: "-25%", // move half the width left
+        x: "-25%", 
         ease: "none",
         scrollTrigger: {
           trigger: ".m-list",
@@ -328,207 +334,129 @@ const CharlieDrink = () => {
         },
       }
     );
-    //cards slide up
-    if(!isMobile){
-    const tl = gsap.timeline({});
-    tl.fromTo(
-      ".step-mask",
-      { scaleX: 0.7 },
-      {
-        scaleX: 1,
-        duration: 0.5,
-        scrollTrigger: {
-          trigger: ".steps-section",
-          start: "top bottom ",
-   
-          end: "top top ",
-          scrub: true,
-          // markers: true,
-        },
-      }
-    );
-    tl.fromTo(
-      ".stepper-wrapper",
-      { y: 0 },
-      {
-        y: "-64%",
-        duration: 0.1,
 
-        scrollTrigger: {
-          trigger: ".steps-section",
-          start: "top top ",
-          end: "bottom 90% ",
-          scrub: true,
-          // markers: true,
-        },
-      }
-    );
-  }
+    //steps section
+    if (!isMobile) {
+      const tl = gsap.timeline({});
+      tl.fromTo(
+        ".step-mask",
+        { scaleX: 0.7 },
+        {
+          scaleX: 1,
+          duration: 0.5,
+          scrollTrigger: {
+            trigger: ".steps-section",
+            start: "top bottom ",
+            end: "top top ",
+            scrub: true,
+            // markers: true,
+          },
+        }
+      );
+      tl.fromTo(
+        ".stepper-wrapper",
+        { y: 0 },
+        {
+          y: "-64%",
+          duration: 0.1,
+
+          scrollTrigger: {
+            trigger: ".steps-section",
+            start: "top top ",
+            end: "bottom 90% ",
+            scrub: true,
+            // markers: true,
+          },
+        }
+      );
+    }
   }, []);
 
-  //colored slides
-  // useEffect(() => {
-  //   const isMobile = window.innerWidth <= 990; // adjust as needed
- 
-  //   gsap.to(".yellow-slide", {
-  //     scaleX: "0.7",
-  //     rotate: "-4deg",
-  //     scrollTrigger: {
-  //       trigger: ".colored-slides",
-  //       start: "bottom 95%",
-  //       willChange:"transform, width, height",
-  //       end: "bottom top",
-  //       scrub: true,
-  //       // markers: true,
-  //     },
-  //   });
-
-  //   const tl = gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: ".yellow-slide",
-  //       start: "top 50%",
-  //       end: "bottom top",
-  //       scrub: true,
-    
-  //        markers: true,
-  //     },
-  //   });
-
-  //   tl.fromTo(
-  //     ".yellow-slide",
-  //     // { width: "80%", height: "80%" },
-  //     {     scaleX: 0.9,
-  //       scaleY: 0.9,
-  //       scaleZ: 0.9,},
-  //     {
-  //       scaleX: 1.1,
-  //       scaleY: 1.1,
-  //       scaleZ: 1,
-  //       // height: "100vh",
-  //       // width: "100vw",
-  //       ease: "none",
-  //       duration: 2,
-  //     }
-  //   ).fromTo(
-  //     ".slide-t",
-  //     { clipPath: "inset(100% 0% 0% 0%)" }, // fully hidden from bottom
-  //     { clipPath: "inset(0% 0% 0% 0%)", ease: "none", },
-  //      isMobile ? "-=2" : "-=1"
-  //   )
-  //   tl.fromTo(
-  //     ".lemon_img",
-  //     { scaleX: 0, scaleY: 0 },
-  //     { scaleX: 1, scaleY: 1 },
-  //    isMobile ? "-=1.5" : "-=0.4"
-  //   );
-  //   tl.fromTo(
-  //     ".blue-slide",
-  //     { scaleX: 0, scaleY: 0 },
-  //     {
-  //       scaleX: 18,
-  //       scaleY: 18,
-  //       scaleZ: 1,
-  //       ease: "power2.inOut",
-  //       delay: 0.5,
-  //     },
-  //   );
-  //   tl.to(".lemon_img", { scaleX: 0, scaleY: 0 }, "-=0.4");
-  //   tl.fromTo(".text-img", { y: 300 }, { y: 0, ease: "power2.inOut" }, "-=0.4");
-  //   tl.set(".p1", { display: "none" }, "-=0.4");
-  //   tl.set(".p2", { display: "flex" }, "-=0.4").fromTo(
-  //     ".slide-t2",
-  //     { clipPath: "inset(100% 0% 0% 0%)" },
-  //     { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
-  //     "-=0.4"
-  //   );
-  // }, []);
-
+  //colored slides section
   useEffect(() => {
-    // Check if mobile (including tablet portrait)
-    const isMobile = window.innerWidth <= 990 || 
-                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    // Common animation elements
-    const yellowSlide = gsap.utils.toArray(".yellow-slide")[0];
-    const coloredSlides = document.querySelector(".colored-slides");
-    
+    const isMobile =
+      window.innerWidth <= 990 ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+
     // Set initial styles based on device
     if (isMobile) {
       gsap.set(".colored-slides", { height: "300vh" });
-      gsap.set(".yellow-slide", { 
+      gsap.set(".yellow-slide", {
         // padding: "5rem 2rem",
         // clipPath: "none",
         // borderRadius: "0"
       });
     }
-    if(isMobile){
-    const tl2 = gsap.timeline({ scrollTrigger: {
-      trigger: ".yellow-slide",
-      start: "top 50%",
-      end: "bottom top",
-      scrub: true,
-    }, });
-    tl2.fromTo(".yellow-slide",
-      { scaleX: 0.9, scaleY: 0.9, scaleZ: 1 },
-      { scaleX: 1.1, scaleY:1.1, scaleZ:1, ease: "none", duration: 2, }
-    )
-    .fromTo(".slide-t",
-      { clipPath: "inset(100% 0% 0% 0%)" },
-      { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
-      isMobile ? "-=2" : "-=1"
-    )
-      
-  .fromTo(".lemon_img",
-      { scale: 0 },
-      { scale: 1 },"-=2"
-  
-    )
-  .to(".lemon_img", 
-      { scale: 0, duration: 1}, 
-   isMobile && "-=1"
-    )
-  
-  .fromTo(".blue-slide",
-      { scale: 0 },
-      { scale: isMobile ? 10 : 18, ease: "power2.inOut" },
-      isMobile ? "-=01" : "-=0.4"
-    )
-    // .to(".lemon_img", 
-    //   { scale: 0 }, 
-    //   "-=0.4"
-    // )
-    .fromTo(".text-img", 
-      { y: 300 }, 
-      { y: 0, ease: "power2.inOut" , delay:1}
-      ,isMobile ? "-=1.6" : "-=0.4"
-    )
-    // .set(".p1", 
-    //   { display: "none" }
-    //   ,isMobile ? "-=0.5" : "-=0.4"
-    // )
-    .to(".p2", 
-      { display: "flex", position:"absolute", }
-,isMobile ? "" : "-=0.4"
-    )
-    .fromTo(".slide-t2",
-      { clipPath: "inset(100% 0% 0% 0%)" },
-      { clipPath: "inset(0% 0% 0% 0%)", ease: "none",delay:1.1 },
-     isMobile ? "" : "-=0.4"
-    );
-  }
-    // Desktop-specific animations
-    
-      gsap.to(".yellow-slide", {
-        scaleX: "0.7",
-        rotate: "-4deg",
+    if (isMobile) {
+      const tl2 = gsap.timeline({
         scrollTrigger: {
-          trigger: ".colored-slides",
-          start: "bottom 95%",
+          trigger: ".yellow-slide",
+          start: "top 50%",
           end: "bottom top",
           scrub: true,
         },
       });
+      tl2
+        .fromTo(
+          ".yellow-slide",
+          { scaleX: 0.9, scaleY: 0.9, scaleZ: 1 },
+          { scaleX: 1.1, scaleY: 1.1, scaleZ: 1, ease: "none", duration: 2 }
+        )
+        .fromTo(
+          ".slide-t",
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
+          isMobile ? "-=2" : "-=1"
+        )
 
+        .fromTo(".lemon_img", { scale: 0 }, { scale: 1 }, "-=2")
+        .to(".lemon_img", { scale: 0, duration: 1 }, isMobile && "-=1")
+
+        .fromTo(
+          ".blue-slide",
+          { scale: 0 },
+          { scale: isMobile ? 10 : 18, ease: "power2.inOut" },
+          isMobile ? "-=01" : "-=0.4"
+        )
+        // .to(".lemon_img",
+        //   { scale: 0 },
+        //   "-=0.4"
+        // )
+        .fromTo(
+          ".text-img",
+          { y: 300 },
+          { y: 0, ease: "power2.inOut", delay: 1 },
+          isMobile ? "-=1.6" : "-=0.4"
+        )
+        // .set(".p1",
+        //   { display: "none" }
+        //   ,isMobile ? "-=0.5" : "-=0.4"
+        // )
+        .to(
+          ".p2",
+          { display: "flex", position: "absolute" },
+          isMobile ? "" : "-=0.4"
+        )
+        .fromTo(
+          ".slide-t2",
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", ease: "none", delay: 1.1 },
+          isMobile ? "" : "-=0.4"
+        );
+    }
+    // Desktop-specific animations
+    gsap.to(".yellow-slide", {
+      scaleX: "0.7",
+      rotate: "-4deg",
+      scrollTrigger: {
+        trigger: ".colored-slides",
+        start: "bottom 95%",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
 
     // Main timeline for both devices
     const tl = gsap.timeline({
@@ -538,270 +466,262 @@ const CharlieDrink = () => {
         end: isMobile ? "+=200%" : "bottom top",
         scrub: true,
         pin: isMobile,
-       pinSpacing:false,
+        pinSpacing: false,
         markers: false,
-      }
+      },
     });
 
     // Animation sequence
-   if(!isMobile) {
-    tl.fromTo(
-      ".yellow-slide",
-      // { width: "80%", height: "80%" },
-      {     scaleX: 0.9,
-        scaleY: 0.9,
-        scaleZ: 0.9,},
-      {
-        scaleX: 1.1,
-        scaleY: 1.1,
-        scaleZ: 1,
-        // height: "100vh",
-        // width: "100vw",
-        ease: "none",
-        duration: 2,
-      }
-    ).fromTo(
-      ".slide-t",
-      { clipPath: "inset(100% 0% 0% 0%)" }, // fully hidden from bottom
-      { clipPath: "inset(0% 0% 0% 0%)", ease: "none", },
-       isMobile ? "-=2" : "-=1"
-    )
-    tl.fromTo(
-      ".lemon_img",
-      { scaleX: 0, scaleY: 0 },
-      { scaleX: 1, scaleY: 1 },
-     isMobile ? "-=1.5" : "-=0.4"
-    );
-    tl.fromTo(
-      ".blue-slide",
-      { scaleX: 0, scaleY: 0 },
-      {
-        scaleX: 18,
-        scaleY: 18,
-        scaleZ: 1,
-        ease: "power2.inOut",
-        delay: 0.5,
-      },
-    );
-    tl.to(".lemon_img", { scaleX: 0, scaleY: 0 }, "-=0.4");
-    tl.fromTo(".text-img", { y: 300 }, { y: 0, ease: "power2.inOut" }, "-=0.4");
-    tl.set(".p1", { display: "none" }, "-=0.4");
-    tl.set(".p2", { display: "flex" }, "-=0.4").fromTo(
-      ".slide-t2",
-      { clipPath: "inset(100% 0% 0% 0%)" },
-      { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
-      "-=0.4"
-    );
-    
-   }
+    if (!isMobile) {
+      tl.fromTo(
+        ".yellow-slide",
+        // { width: "80%", height: "80%" },
+        { scaleX: 0.9, scaleY: 0.9, scaleZ: 0.9 },
+        {
+          scaleX: 1.1,
+          scaleY: 1.1,
+          scaleZ: 1,
+          // height: "100vh",
+          // width: "100vw",
+          ease: "none",
+          duration: 2,
+        }
+      ).fromTo(
+        ".slide-t",
+        { clipPath: "inset(100% 0% 0% 0%)" }, // fully hidden from bottom
+        { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
+        isMobile ? "-=2" : "-=1"
+      );
+      tl.fromTo(
+        ".lemon_img",
+        { scaleX: 0, scaleY: 0 },
+        { scaleX: 1, scaleY: 1 },
+        isMobile ? "-=1.5" : "-=0.4"
+      );
+      tl.fromTo(
+        ".blue-slide",
+        { scaleX: 0, scaleY: 0 },
+        {
+          scaleX: 18,
+          scaleY: 18,
+          scaleZ: 1,
+          ease: "power2.inOut",
+          delay: 0.5,
+        }
+      );
+      tl.to(".lemon_img", { scaleX: 0, scaleY: 0 }, "-=0.4");
+      tl.fromTo(
+        ".text-img",
+        { y: 300 },
+        { y: 0, ease: "power2.inOut" },
+        "-=0.4"
+      );
+      tl.set(".p1", { display: "none" }, "-=0.4");
+      tl.set(".p2", { display: "flex" }, "-=0.4").fromTo(
+        ".slide-t2",
+        { clipPath: "inset(100% 0% 0% 0%)" },
+        { clipPath: "inset(0% 0% 0% 0%)", ease: "none" },
+        "-=0.4"
+      );
+    }
 
- 
     // Cleanup function
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       tl.kill();
     };
   }, []);
 
-  
-  
-  
-    //social section
+  //social section
   useEffect(() => {
     const isMobile = window.innerWidth <= 990;
     const isLg = window.innerWidth > 1000 && window.innerWidth < 1442;
-  
-    if(isLg){
+
+    if (isLg) {
       gsap.to(".stepper-wrapper", {
-       scrollTrigger: {
-         trigger: ".steps-section",
-         start: "top top",
-         end: "bottom bottom", // or "bottom top" depending on how long you want the pin
-         scrub: true,
-         pin: true,
-         pinSpacer: false,
-         pinSpacing: false,
-         // markers: true, // for debugging
-       },
-     });
-      }
+        scrollTrigger: {
+          trigger: ".steps-section",
+          start: "top top",
+          end: "bottom bottom", 
+          scrub: true,
+          pin: true,
+          pinSpacer: false,
+          pinSpacing: false,
+          // markers: true, 
+        },
+      });
+    }
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".socials-section",
         start: "top 70% ",
         delay: 1,
-   
-        toggleActions: "play reset play reset", 
 
+        toggleActions: "play reset play reset",
       },
     });
     tl.fromTo(
       ".h-socials",
-      { y: 200,  },
+      { y: 200 },
       {
         y: 0,
         duration: "0.5",
-        
-    
       }
     )
- .fromTo(
-      ".cd-slider-component",
+      .fromTo(
+        ".cd-slider-component",
+        { x: 0 },
+        {
+          x: isMobile ? "-5%" : "-20%",
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: ".cd-slider-component",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            // markers: true,
+          },
+        }
+      )
+      .fromTo(
+        ".zoom-img",
+        { scale: 1.2 },
+        {
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".zoom-img",
+            start: "top bottom",
+            end: "top top",
+
+            scrub: "true",
+          },
+        },
+        "-=1"
+      );
+  }, []);
+
+  //footer section
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 990;
+
+    gsap.fromTo(
+      ".footer-para",
+      { y: 200 },
+      {
+        y: 0,
+
+        scrollTrigger: {
+          trigger: ".cd-footer",
+          start: "top 50%",
+          stagger: 0.4,
+          toggleActions: "play reset play reset",
+          duration: 0.4,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".fg-r",
+      { scaleX: 0.7, scaleY: 0.7, rotateX: "10deg" },
+      {
+        scaleX: 1,
+        scaleY: 1,
+        rotateZ: 0,
+        scrollTrigger: {
+          trigger: ".cd-footer",
+          start: "top 80%",
+
+          scrub: true,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".footer-marquee",
       { x: 0 },
       {
-        x: isMobile ? "-5%" : "-20%", 
-        ease: "power2.inOut",
+        x: isMobile ? "50%" : "-25%", 
+        ease: "none",
         scrollTrigger: {
-          trigger: ".cd-slider-component",
+          trigger: ".footer-marquee",
           start: "top bottom",
           end: "bottom top",
           scrub: true,
           // markers: true,
         },
       }
-    )
-    .fromTo(
-      ".zoom-img",
-      {scale:1.2},
-      {
-      scale:1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".zoom-img",
-          start: "top bottom",
-          end: "top top",
-          
-        scrub:"true",
-        },
-      },"-=1"
-    )
-
-   
-
-  }, []);
-//footer
-useEffect(() => {
-  const isMobile = window.innerWidth <= 990;
-
-
-  gsap.fromTo(
-    ".footer-para",
-    { y: 200 },
-    {
-      y: 0,
-  
-      scrollTrigger: {
-        trigger: ".cd-footer",
-        start: "top 50%",
-        stagger: 0.4,
-        toggleActions: "play reset play reset", 
-        duration:0.4,
-    
-      },
-    }
-  );
-
-  gsap.fromTo(
-    ".fg-r",
-    { scaleX:0.7, scaleY:0.7, rotateX:"10deg" },
-    {
-     
-      scaleX:1, scaleY:1, rotateZ:0,
-      scrollTrigger: {
-        trigger: ".cd-footer",
-        start: "top 80%",
-       
-        scrub:true,
-   
-    
-      },
-    }
-  );
-
-
-  gsap.fromTo(
-    ".footer-marquee",
-    { x: 0 },
-    {
-      x: isMobile ? "50%" :  "-25%", // move half the width left
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".footer-marquee",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-        // markers: true,
-      },
-    }
-  );
-
- 
-}, []);
-
-
-const [open,setOpen] = useState(false)
-//toggle header
-useEffect(() => {
-  if (open) {
-    gsap.fromTo(
-      ".headerOpen",
-      { y: "-100%", opacity: 0 },
-      { y: "0%", opacity: 1, duration: 0.6, ease: "power2.out" }
     );
-  }
-}, [open]);
-const [activeLink, setActiveLink] = useState("");
+  }, []);
 
-const handleClick = (id) => {
-  setActiveLink(id);
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth" });
-  }
-};
-const textRefs = useRef([]);
- 
-const btnHover = (index) => {
-  const textRef = textRefs.current[index];
-  if (textRef) {
-    gsap.timeline()
-      .to(textRef, {
-        y: -20,
-        duration: 0.2,
-        ease: "power2.in",
-      })
-      .set(textRef, { y: 20 })
-      .to(textRef, {
+  
+  //toggle header (Mobile responsive)
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      gsap.fromTo(
+        ".headerOpen",
+        { y: "-100%", opacity: 0 },
+        { y: "0%", opacity: 1, duration: 0.6, ease: "power2.out" }
+      );
+    }
+  }, [open]);
+  const [activeLink, setActiveLink] = useState("");
+
+  const handleClick = (id) => {
+    setActiveLink(id);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const textRefs = useRef([]);
+
+  //button animation
+  const btnHover = (index) => {
+    const textRef = textRefs.current[index];
+    if (textRef) {
+      gsap
+        .timeline()
+        .to(textRef, {
+          y: -20,
+          duration: 0.2,
+          ease: "power2.in",
+        })
+        .set(textRef, { y: 20 })
+        .to(textRef, {
+          y: 0,
+          duration: 0.2,
+          ease: "power2.out",
+        });
+    }
+  };
+
+  const btnUnhover = (index) => {
+    const textRef = textRefs.current[index];
+    if (textRef) {
+      gsap.to(textRef, {
         y: 0,
-        duration: 0.2,
+        duration: 0.3,
         ease: "power2.out",
       });
-  }
-};
-const logoHover = () => {
-  
+    }
+  };
 
+  //logo animation
+  const logoHover = () => {
+    gsap.fromTo(
+      ".cd-logo",
 
-      gsap.fromTo(".cd-logo", 
-     
-       { skewX: 25,skewY: 15,},
-       { skewX: 0,skewY: 0,  ease: "none", duration:0.3}
-  
-  )
-}
+      { skewX: 25, skewY: 15 },
+      { skewX: 0, skewY: 0, ease: "none", duration: 0.3 }
+    );
+  };
 
-const btnUnhover = (index) => {
-  const textRef = textRefs.current[index];
-  if (textRef) {
-    gsap.to(textRef, {
-      y: 0,
-      duration: 0.3,
-      ease: "power2.out",
-    });
-  }
-};
   return (
     <div ref={wrapperRef} bubbles="" className="charlie-drink">
+      {/* header */}
       <div className={`charlie-drink-header ${open && "headerOpen"}`}>
         <div className="h-top">
           <div className="circle">
@@ -813,133 +733,173 @@ const btnUnhover = (index) => {
             ></img>
           </div>
           <img
-          className="cd-logo"
+            className="cd-logo"
             src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/67cea500e52540fc4346f61b_Charlie%20organics.svg"
             alt="cd logo"
             width={160}
             height={68}
             onMouseEnter={logoHover}
           ></img>
-          <button onClick={()=> { isMobile && setOpen(!open)}} style={{ background: open && "#22546e" }}
- className="order-btn" onMouseEnter={()=>btnHover(0)}  onMouseLeave={()=>btnUnhover(0)}><span ref={(el) => (textRefs.current[0] = el)}>ORDER</span>
-          {!open ?
-         ( <svg className="toggle-svg"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      viewBox="0 0 20 20"
-      width="20"
-      height="20"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <defs>
-        <clipPath id="__lottie_element_1526">
-          <rect width="20" height="20" x="0" y="0" />
-        </clipPath>
-        <clipPath id="__lottie_element_1539">
-          <path d="M0,0 L10,0 L10,2 L0,2z" />
-        </clipPath>
-      </defs>
-      <g clipPath="url(#__lottie_element_1526)">
-        <g transform="matrix(1,0,0,1,0,2.999999761581421)" opacity="1">
-          <path
-            fill="rgb(33,83,109)"
-            fillOpacity="1"
-            d="M20,1 C20,0.4481000006198883 19.55190086364746,0 19,0 C19,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 19,2 19,2 C19.55190086364746,2 20,1.551900029182434 20,1 C20,1 20,1 20,1z"
-          />
-        </g>
-        <g transform="matrix(1,0,0,1,0,15.000000953674316)" opacity="1">
-          <path
-            fill="rgb(33,83,109)"
-            fillOpacity="1"
-            d="M20,1 C20,0.4481000006198883 19.55190086364746,0 19,0 C19,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 19,2 19,2 C19.55190086364746,2 20,1.551900029182434 20,1 C20,1 20,1 20,1z"
-          />
-        </g>
-        <g
-          clipPath="url(#__lottie_element_1539)"
-          transform="matrix(1,0,0,1,0,9)"
-          opacity="1"
-        >
-          <g transform="matrix(1,0,0,1,0,0)" opacity="1">
-            <path
-              fill="rgb(33,83,109)"
-              fillOpacity="1"
-              d="M10,1 C10,0.4481000006198883 9.551899909973145,0 9,0 C9,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 9,2 9,2 C9.551899909973145,2 10,1.551900029182434 10,1 C10,1 10,1 10,1z"
-            />
-          </g>
-        </g>
-      </g>
-    </svg>)
-    :
-   ( <svg
-    className="close-svg"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlnsXlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 20 20"
-  width="20"
-  height="20"
-  preserveAspectRatio="xMidYMid meet"
->
-  <defs>
-    <clipPath id="__lottie_element_1526">
-      <rect width="20" height="20" x="0" y="0" />
-    </clipPath>
-    <clipPath id="__lottie_element_1539">
-      <path d="M0,0 L10,0 L10,2 L0,2z" />
-    </clipPath>
-  </defs>
-  <g clipPath="url(#__lottie_element_1526)">
-    <g
-      transform="matrix(0.7071068286895752,0.7071067690849304,-0.7071067690849304,0.7071068286895752,3.6360387802124023,2.22182559967041)"
-      opacity="1"
-    >
-      <path
-        fill="rgb(255,255,255)"
-        fillOpacity="1"
-        d="M20,1 C20,0.4481 19.5519,0 19,0 C19,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 19,2 19,2 C19.5519,2 20,1.5519 20,1 C20,1 20,1 20,1z"
-      />
-    </g>
-    <g
-      transform="matrix(0.7071068286895752,-0.7071067690849304,0.7071067690849304,0.7071068286895752,2.221825122833252,16.36396026611328)"
-      opacity="1"
-    >
-      <path
-        fill="rgb(255,255,255)"
-        fillOpacity="1"
-        d="M20,1 C20,0.4481 19.5519,0 19,0 C19,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 19,2 19,2 C19.5519,2 20,1.5519 20,1 C20,1 20,1 20,1z"
-      />
-    </g>
-    <g clipPath="url(#__lottie_element_1539)" transform="matrix(1,0,0,1,0,9)" opacity="0">
-      <g transform="matrix(1,0,0,1,0,0)" opacity="1">
-        <path
-          fill="rgb(255,255,255)"
-          fillOpacity="1"
-          d="M10,1 C10,0.4481 9.5519,0 9,0 C9,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 9,2 9,2 C9.5519,2 10,1.5519 10,1 C10,1 10,1 10,1z"
-        />
-      </g>
-    </g>
-  </g>
-</svg>)
-}
+          <button
+            onClick={() => {
+              isMobile && setOpen(!open);
+            }}
+            style={{ background: open && "#22546e" }}
+            className="order-btn"
+            onMouseEnter={() => btnHover(0)}
+            onMouseLeave={() => btnUnhover(0)}
+          >
+            <span ref={(el) => (textRefs.current[0] = el)}>ORDER</span>
+            {!open ? (
+              <svg
+                className="toggle-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 20 20"
+                width="20"
+                height="20"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <defs>
+                  <clipPath id="__lottie_element_1526">
+                    <rect width="20" height="20" x="0" y="0" />
+                  </clipPath>
+                  <clipPath id="__lottie_element_1539">
+                    <path d="M0,0 L10,0 L10,2 L0,2z" />
+                  </clipPath>
+                </defs>
+                <g clipPath="url(#__lottie_element_1526)">
+                  <g
+                    transform="matrix(1,0,0,1,0,2.999999761581421)"
+                    opacity="1"
+                  >
+                    <path
+                      fill="rgb(33,83,109)"
+                      fillOpacity="1"
+                      d="M20,1 C20,0.4481000006198883 19.55190086364746,0 19,0 C19,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 19,2 19,2 C19.55190086364746,2 20,1.551900029182434 20,1 C20,1 20,1 20,1z"
+                    />
+                  </g>
+                  <g
+                    transform="matrix(1,0,0,1,0,15.000000953674316)"
+                    opacity="1"
+                  >
+                    <path
+                      fill="rgb(33,83,109)"
+                      fillOpacity="1"
+                      d="M20,1 C20,0.4481000006198883 19.55190086364746,0 19,0 C19,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 19,2 19,2 C19.55190086364746,2 20,1.551900029182434 20,1 C20,1 20,1 20,1z"
+                    />
+                  </g>
+                  <g
+                    clipPath="url(#__lottie_element_1539)"
+                    transform="matrix(1,0,0,1,0,9)"
+                    opacity="1"
+                  >
+                    <g transform="matrix(1,0,0,1,0,0)" opacity="1">
+                      <path
+                        fill="rgb(33,83,109)"
+                        fillOpacity="1"
+                        d="M10,1 C10,0.4481000006198883 9.551899909973145,0 9,0 C9,0 1,0 1,0 C0.4481000006198883,0 0,0.4481000006198883 0,1 C0,1 0,1 0,1 C0,1.551900029182434 0.4481000006198883,2 1,2 C1,2 9,2 9,2 C9.551899909973145,2 10,1.551900029182434 10,1 C10,1 10,1 10,1z"
+                      />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            ) : (
+              <svg
+                className="close-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 20 20"
+                width="20"
+                height="20"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <defs>
+                  <clipPath id="__lottie_element_1526">
+                    <rect width="20" height="20" x="0" y="0" />
+                  </clipPath>
+                  <clipPath id="__lottie_element_1539">
+                    <path d="M0,0 L10,0 L10,2 L0,2z" />
+                  </clipPath>
+                </defs>
+                <g clipPath="url(#__lottie_element_1526)">
+                  <g
+                    transform="matrix(0.7071068286895752,0.7071067690849304,-0.7071067690849304,0.7071068286895752,3.6360387802124023,2.22182559967041)"
+                    opacity="1"
+                  >
+                    <path
+                      fill="rgb(255,255,255)"
+                      fillOpacity="1"
+                      d="M20,1 C20,0.4481 19.5519,0 19,0 C19,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 19,2 19,2 C19.5519,2 20,1.5519 20,1 C20,1 20,1 20,1z"
+                    />
+                  </g>
+                  <g
+                    transform="matrix(0.7071068286895752,-0.7071067690849304,0.7071067690849304,0.7071068286895752,2.221825122833252,16.36396026611328)"
+                    opacity="1"
+                  >
+                    <path
+                      fill="rgb(255,255,255)"
+                      fillOpacity="1"
+                      d="M20,1 C20,0.4481 19.5519,0 19,0 C19,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 19,2 19,2 C19.5519,2 20,1.5519 20,1 C20,1 20,1 20,1z"
+                    />
+                  </g>
+                  <g
+                    clipPath="url(#__lottie_element_1539)"
+                    transform="matrix(1,0,0,1,0,9)"
+                    opacity="0"
+                  >
+                    <g transform="matrix(1,0,0,1,0,0)" opacity="1">
+                      <path
+                        fill="rgb(255,255,255)"
+                        fillOpacity="1"
+                        d="M10,1 C10,0.4481 9.5519,0 9,0 C9,0 1,0 1,0 C0.4481,0 0,0.4481 0,1 C0,1 0,1 0,1 C0,1.5519 0.4481,2 1,2 C1,2 9,2 9,2 C9.5519,2 10,1.5519 10,1 C10,1 10,1 10,1z"
+                      />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            )}
           </button>
         </div>
         <div className={`h-bottom ${open && "bottomHeader"}`}>
-          <a  href="#"
-        className={activeLink === "products" ? "active" : ""}
-        onClick={() => handleClick("products")}>PRODUCTS</a>
-          <a  href="#"
-        className={activeLink === "our-story" ? "active" : ""}
-        onClick={() => handleClick("our-story")}>OUR STORY</a>
-          <a  href="#"
-        className={activeLink === "faq" ? "active" : ""}
-        onClick={() => handleClick("faq")}>FAQ</a>
-          <a  href="#"
-        className={activeLink === "contact" ? "active" : ""}
-        onClick={() => handleClick("contact")}>CONTACT</a>
-          <a  href="#"
-        className={activeLink === "order" ? "active" : ""}
-        onClick={() => handleClick("order")}>ORDER</a>
+          <a
+            href="#"
+            className={activeLink === "products" ? "active" : ""}
+            onClick={() => handleClick("products")}
+          >
+            PRODUCTS
+          </a>
+          <a
+            href="#"
+            className={activeLink === "our-story" ? "active" : ""}
+            onClick={() => handleClick("our-story")}
+          >
+            OUR STORY
+          </a>
+          <a
+            href="#"
+            className={activeLink === "faq" ? "active" : ""}
+            onClick={() => handleClick("faq")}
+          >
+            FAQ
+          </a>
+          <a
+            href="#"
+            className={activeLink === "contact" ? "active" : ""}
+            onClick={() => handleClick("contact")}
+          >
+            CONTACT
+          </a>
+          <a
+            href="#"
+            className={activeLink === "order" ? "active" : ""}
+            onClick={() => handleClick("order")}
+          >
+            ORDER
+          </a>
         </div>
-      </div>
+      </div>     
+
       <section className="cd-hero">
         <div className="cd-hero-wrapper" ref={containerRef}>
           <img
@@ -973,7 +933,7 @@ const btnUnhover = (index) => {
           </video>
         </div>
       </section>
-
+  
       <section id="products" className="cd-products">
         <div className="products-header">
           <h1>PRODUCTS</h1>
@@ -1134,7 +1094,6 @@ const btnUnhover = (index) => {
                 className="text-img"
               />
             </div>
-            
           </div>
           {/* <div className="blue-slide">
           <p className="product-text">
@@ -1170,7 +1129,13 @@ const btnUnhover = (index) => {
                 alt=""
                 class="info_drip"
               />
-              <button className="order-btn-blue" onMouseEnter={()=>btnHover(1)}  onMouseLeave={()=>btnUnhover(1)}><span ref={(el) => (textRefs.current[1] = el)}>ORDER NOW</span></button>
+              <button
+                className="order-btn-blue"
+                onMouseEnter={() => btnHover(1)}
+                onMouseLeave={() => btnUnhover(1)}
+              >
+                <span ref={(el) => (textRefs.current[1] = el)}>ORDER NOW</span>
+              </button>
             </div>
             <div className="drop-mask">
               <img
@@ -1272,6 +1237,7 @@ const btnUnhover = (index) => {
           </div>
         </div>
       </section>
+      
       <section className="socials-section">
         <div className="container-large">
           <div className="products-header">
@@ -1285,7 +1251,7 @@ const btnUnhover = (index) => {
         <div className="cd-slider-component">
           <div className="cd-slide">
             <img
-            className="zoom-img"
+              className="zoom-img"
               width={536}
               height={635}
               src="https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/679ba94976f6357e69a72f5c_Scherm_afbeelding%202025-01-30%20om%2017.29.22.avif"
@@ -1293,7 +1259,7 @@ const btnUnhover = (index) => {
           </div>
           <div className="cd-slide">
             <img
-               className="zoom-img"
+              className="zoom-img"
               width={536}
               height={635}
               src="https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/679ba9214b0e009ffebd292d_Scherm_afbeelding%202025-01-30%20om%2017.29.10.avif"
@@ -1301,7 +1267,7 @@ const btnUnhover = (index) => {
           </div>
           <div className="cd-slide">
             <img
-               className="zoom-img"
+              className="zoom-img"
               width={536}
               height={635}
               src="https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/679a2b9503d0d67e3ae58400_Scherm%C2%ADafbeelding%202023-11-30%20om%2020.50.23.avif"
@@ -1309,7 +1275,7 @@ const btnUnhover = (index) => {
           </div>
           <div className="cd-slide">
             <img
-               className="zoom-img"
+              className="zoom-img"
               width={536}
               height={635}
               src="https://cdn.prod.website-files.com/66dabe4fe2fdbb07d092f829/679ba94976f6357e69a72f5c_Scherm_afbeelding%202025-01-30%20om%2017.29.22.avif"
@@ -1324,9 +1290,15 @@ const btnUnhover = (index) => {
             <div className="f-grid">
               <div className="fg-l">
                 <p>
-                <span  className="footer-para">Enjoy the pure, organic taste of Charlie’s </span>
-  <span  className="footer-para">- no added sugars, no nonsense, just</span>
-  <span  className="footer-para">refreshment in a fully recyclable can</span>
+                  <span className="footer-para">
+                    Enjoy the pure, organic taste of Charlie’s{" "}
+                  </span>
+                  <span className="footer-para">
+                    - no added sugars, no nonsense, just
+                  </span>
+                  <span className="footer-para">
+                    refreshment in a fully recyclable can
+                  </span>
                 </p>
                 <img
                   src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/6745ca6cec81ee7fac907794_drip.svg"
@@ -1343,14 +1315,13 @@ const btnUnhover = (index) => {
               ></img>
             </div>
 
-
-<div className="f-nav-items">
-  <span>PRODUCTS</span>
-  <span>OUR STORY</span>
-  <span>FAQ</span>
-  <span>CONTACT</span>
-  <span>ORDER</span>
-</div>
+            <div className="f-nav-items">
+              <span>PRODUCTS</span>
+              <span>OUR STORY</span>
+              <span>FAQ</span>
+              <span>CONTACT</span>
+              <span>ORDER</span>
+            </div>
             <div class="footer-marquee">
               <img
                 src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/6745c83eed8b5149d602d8b9_intro_img.avif"
@@ -1386,10 +1357,16 @@ const btnUnhover = (index) => {
               <div class="footer_marquee-text">Follow us</div>
             </div>
 
-            <div className="f-links"><span>©2025</span>
-            <span>  Privacyvoorwaarden</span>
-            <span>Actievoorwaarden</span>
-            <img src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/674dd520260b1fb9027e22e2_heart.svg" width={145} height={32} alt ="f text"></img>
+            <div className="f-links">
+              <span>©2025</span>
+              <span> Privacyvoorwaarden</span>
+              <span>Actievoorwaarden</span>
+              <img
+                src="https://cdn.prod.website-files.com/66dab405fff44f5d08af4edb/674dd520260b1fb9027e22e2_heart.svg"
+                width={145}
+                height={32}
+                alt="f text"
+              ></img>
             </div>
           </div>
         </div>
