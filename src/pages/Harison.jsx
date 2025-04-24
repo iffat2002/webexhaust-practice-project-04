@@ -324,7 +324,7 @@ video-container"
                 </div>
               </div>
 
-              <div className="right-top">
+              <div className="right-top ff">
                 <p>FOLLOW</p>
                 <div className="icons">
                   <img src={icon} width={24} height={24} alt="icon" />

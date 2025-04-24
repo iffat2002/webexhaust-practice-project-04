@@ -615,6 +615,9 @@ position: relative;
   margin: 0;
  
 }
+.right p{
+  cursor:pointer
+}
 
 /* Right section */
 .right-links {
@@ -672,15 +675,50 @@ footer{
   padding: 0 10px;
   gap:20px;
  }
+
   }
 
-@media (max-width: 810px) {
-  .hero-text{
-    width: auto;
+  @media (max-width: 1025px) {
+   .footer-top{
+flex-direction: column;
+   }
+   .right-top {
+    flex-direction: column;
+  }
+  .right-top p {
+    width: 100px
+  }
+  .services-content, .service-item{
+    width: 100%;
+  }
+  .footer-right{
+    padding-left: 0px;
+      gap: 60px;
+  }
+  .ff{
+    flex-direction: row;
   }
   footer{
     padding-top: 2px;
   }
+  .footer-left{
+
+      padding-right: 0;
+      border-right: 0px;
+  }
+  .footer-text{
+    font-size: 27px;
+  }
+    }
+
+@media (max-width: 810px) {
+  .logo-wrapper{
+    height:35vh
+   }
+  .hero-text{
+    width: auto;
+  }
+
   .harison-content{
     margin-top: 80px;
   }
@@ -722,9 +760,7 @@ header{
     padding-right: 0;
     border-right: 0px;
 }
-.footer-text{
-  font-size: 27px;
-}
+
 .video-grid{
   display: none;
 }
@@ -732,14 +768,9 @@ header{
   width: 100%;
   height: auto;
 }
-.footer-right{
-  padding-left: 0px;
-    gap: 60px;
-}
 
-.services-content, .service-item{
-  width: 100%;
-}
+
+
 .right-bottom{
   flex-direction: column;
   gap: 30px;
@@ -758,11 +789,6 @@ header{
   left: 50%;
   transform: translate(-50%);
 }
-.right-top {
-  flex-direction: column;
-}
-.right-top p {
-  width: 100px
-}
+
 
 }
