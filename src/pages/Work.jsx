@@ -7,6 +7,7 @@ import Marquee from "react-fast-marquee";
 import icon from "../images/insta.svg";
 import AnimatedText from "../components/AnimatedText";
 import { useNavigate } from "react-router-dom";
+import HarisonHeader from "../components/HarisonHeader";
 gsap.registerPlugin(ScrollTrigger);
 const Work = () => {
   const navigate = useNavigate();
@@ -304,37 +305,7 @@ const Work = () => {
   }, []);
 
 
-  const logoRef = useRef(null);
-  const linksRef = useRef([]);
-  const headerRef = useRef(null);
-
-  // Clear on each render to avoid duplicates (especially in dev mode)
-  linksRef.current = [];
-
-  useEffect(() => {
-    const tl = gsap.timeline({});
   
-    // Logo animation: from opacity 0 and y: 50 → to opacity 1 and y: 0
-    tl.fromTo(
-      logoRef.current,
-      { y: 80, opacity: 0 },
-      { y: 0, opacity: 1, duration: 2 }
-    );
-  
-    // Links animation: from opacity 0 and y: 30 → to opacity 1 and y: 0
-    tl.fromTo(
-      linksRef.current,
-      { y: 80, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.2,
-        duration: 1,
-      },
-      "-=2" // Overlap a bit with logo animation
-    );
-  }, []);
-
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -345,44 +316,7 @@ const Work = () => {
 
     <div className="overflow-hidden" ref={containerRef}>
       
-      <header className="harison-header"  ref={headerRef}>
-        <div className="boxx">
-          <div
-            className="
-    header"
-          >
-            <div className="left">
-              <img
-              ref={logoRef}
-                onClick={() => navigate("/harison")}
-                src="https://framerusercontent.com/images/E4ICFTxGKZdn6E6cf8MfRB6M5Ak.png?scale-down-to=512"
-                alt="logo"
-                width={100}
-                height={16}
-              />
-            </div>
-           
-           
-          <div className="right">
-            {["Work", "Archive", "Studio", "Press", "Contact", "Buy Template"].map(
-              (text, index) => (
-                <p
-                  key={index}
-                  ref={(el) => (linksRef.current[index] = el)}
-                  className="header-anchor"
-                  onClick={() =>
-                    text === "Work" ? navigate("/harison/work") : null
-                  }
-                >
-                  {text}
-                </p>
-              )
-            )}
-          </div>
-
-          </div>
-        </div>
-      </header>
+     <HarisonHeader />
       <div className="scroll-main">
         <div className="work-slider-content" ref={sliderRef}>
           {cardData.map((card, index) => (

@@ -6,29 +6,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import icon from "../images/insta.svg";
 import { useNavigate } from "react-router-dom";
 import AnimatedText from "../components/AnimatedText";
+import HarisonHeader from "../components/HarisonHeader";
 
 gsap.registerPlugin(ScrollTrigger);
 const Harison = () => {
   const navigate = useNavigate();
   const pageRef = useRef(null);
 
-  const handleNavigate = () => {
-    gsap.fromTo(
-      pageRef.current,
-      {
-        opacity: 1,
-      },
-      {
-        opacity: 0.4,
-        duration: 0.4,
-        
-        onComplete: () => {
-          navigate("/harison/work"); 
-        },
-      }
-    );
-  };
-  
+
 
   useEffect(() => {
     gsap.fromTo(
@@ -39,6 +24,7 @@ const Harison = () => {
   }, []);
   const textRef = useRef(null);
   const moveUp = useRef(null);
+  //hero + photos scroll
   useEffect(() => {
     const bottoms = [".logo-bottom1", ".logo-bottom2", ".logo-bottom3"];
 
@@ -116,7 +102,7 @@ const Harison = () => {
   const borderRef = useRef(null);
 
  
-
+//footer
   useEffect(() => {
     const items = document.querySelectorAll(".service-item");
 
@@ -163,38 +149,7 @@ const Harison = () => {
 
 
 
-  const logoRef = useRef(null);
-  const linksRef = useRef([]);
-  const headerRef = useRef(null);
-
-  // Clear on each render to avoid duplicates (especially in dev mode)
-  linksRef.current = [];
-
-  useEffect(() => {
-    const tl = gsap.timeline({});
-  
-    // Logo animation: from opacity 0 and y: 50 → to opacity 1 and y: 0
-    tl.fromTo(
-      logoRef.current,
-      { y: 80, opacity: 0 },
-      { y: 0, opacity: 1, duration: 2 }
-    );
-  
-    // Links animation: from opacity 0 and y: 30 → to opacity 1 and y: 0
-    tl.fromTo(
-      linksRef.current,
-      { y: 80, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.2,
-        duration: 1,
-      },
-      "-=2" // Overlap a bit with logo animation
-    );
-  }, []);
-
-
+ 
     const handleScrollToTop = () => {
       window.scrollTo({
         top: 0,
@@ -203,76 +158,17 @@ const Harison = () => {
     };
 
 
-    const [menuOpen, setMenuOpen] = useState(false);
-
-    const toggleMenu = () => setMenuOpen(!menuOpen);
   
   return (
-    <div ref={pageRef} style={{background:"white"}}>
+    <div ref={pageRef} style={{background:"white", }}>
      
-     <header className="harison-header"  ref={headerRef}>
-        <div className="boxx">
-          <div
-            className="
-    header"
-          >
-            <div className="left">
-              <img
-              ref={logoRef}
-              onClick={handleNavigate}
-                src="https://framerusercontent.com/images/E4ICFTxGKZdn6E6cf8MfRB6M5Ak.png?scale-down-to=512"
-                alt="logo"
-                width={100}
-                height={16}
-              />
-            </div>
-           
-           
-          <div className="right">
-            {["Work", "Archive", "Studio", "Press", "Contact", "Buy Template"].map(
-              (text, index) => (
-                <p
-                  key={index}
-                  ref={(el) => (linksRef.current[index] = el)}
-                  className="header-anchor"
-                  onClick={handleNavigate}
-                >
-                  {text}
-                </p>
-              )
-            )}
-           <p className="menu-tag" onClick={toggleMenu}> {menuOpen ? 'Close' : 'Menu'}</p>
-          </div>
-
-          </div>
-        </div>
-      </header>
-
-
-      {menuOpen && (
-        <div className="overlay-menu">
-          <div className="left-links">
-            <p>Work</p>
-            <p>Archive</p>
-            <p>Studio</p>
-            <p>Press</p>
-            <p>Contact</p>
-            <p>Purchase</p>
-          </div>
-          <div className="right-links">
-            <p><strong>Instagram</strong></p>
-            <p>Twitter</p>
-            <p>LinkedIn</p>
-            <p>Dribbble</p>
-          </div>
-        </div>
-      )}
+    <HarisonHeader />
 
 
     <div>
     
 
-      <div>
+      <div className="harison-content">
         <div className="boxx">
           <div className="logo-wrapper">
             <img
@@ -305,7 +201,7 @@ const Harison = () => {
           </div>
           <p className="hero-text">
             Independent designer based in Germany, working globally, and
-            creating<br></br> meaningful and purpose driven digital brand
+            creating meaningful and purpose driven digital brand
             experiences.
           </p>
         </div>
@@ -363,9 +259,7 @@ video-container"
             src="https://framerusercontent.com/images/Rx7jEden3crkGVCmRkBGrDLw.jpg"
           />
         </div>
-      </div>
-
-      <footer>
+        <footer>
         <div className="footer-container">
           <div className="footer-top">
             <div className="footer-left">
@@ -466,6 +360,9 @@ video-container"
           </div>
         </div>
       </footer>
+      </div>
+
+      
     </div>
     </div>
   );
