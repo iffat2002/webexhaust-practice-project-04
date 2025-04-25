@@ -39,13 +39,14 @@ const CursorAnimation = () => {
   }, []);
   useEffect(() => {
     gsap.utils.toArray(".table-row").forEach((row, index) => {
+      const SMobile = window.innerWidth <= 480; // Adjust this breakpoint as needed
       gsap.fromTo(
         row.querySelector(".table-right"),
         {
           x: 0,
         },
         {
-          x: 210,
+        x: SMobile ? 60 : 210,
           scrollTrigger: {
             trigger: row,
             start: "top 90%",
@@ -56,14 +57,14 @@ const CursorAnimation = () => {
             toggleActions: "play none none reverse",
             onEnterBack: () => {
               gsap.to(row.querySelector(".table-right"), {
-                x: 210,
+                x: SMobile ? 60 : 210,
                 duration: 1,
                 ease: "power1.inOut",
               });
             },
             onLeave: () => {
               gsap.to(row.querySelector(".table-right"), {
-                x: 0,
+                x: SMobile ? 60 : 210,
                 duration: 1,
                 ease: "power1.inOut",
               });
@@ -119,18 +120,18 @@ const CursorAnimation = () => {
       .timeline({
         scrollTrigger: {
           trigger: ".item-1",
-          start: "90vh",
-          end: "bottom 30%",
+          start: "top 15%",
+          end: "",
           scrub: true,
           markers: false,
         },
       })
 
-      .to(".item-1", { scaleX: 1.4, scaleY: 0.8, duration: 3 })
+      .to(".item-1", { scaleX: 1.2, scaleY: 0.8, duration: 1 })
       .to(".item-1", {
         scaleX: 0,
         scaleY: 2,
-        skewY: -3,
+        skewY: -5,
         skewX: 0,
         duration: 2,
       });
@@ -160,7 +161,7 @@ const CursorAnimation = () => {
         scrollTrigger: {
           trigger: ".item-3",
           start: "top top",
-          end: "top -100%",
+          end: "",
        
           scrub: true,
           markers: false,
@@ -240,25 +241,25 @@ const CursorAnimation = () => {
       </section>
       <div className="text-table">
         <div className="table-row">
-          <div className="count">1</div>
+          <div className="count"><span className="b-r">1</span></div>
           <div className="table-right">
             Research, brainstorming & conception
           </div>
         </div>
         <div className="table-row">
-          <div className="count">2</div>
+          <div className="count"><span className="b-r">2</span></div>
           <div className="table-right">
             Research, brainstorming & conception
           </div>
         </div>
         <div className="table-row">
-          <div className="count">3</div>
+          <div className="count"><span className="b-r">3</span></div>
           <div className="table-right">
             Research, brainstorming & conception
           </div>
         </div>
         <div className="table-row">
-          <div className="count">4</div>
+          <div className="count"><span className="b-r">4</span></div>
           <div className="table-right">
             Research, brainstorming & conception
           </div>

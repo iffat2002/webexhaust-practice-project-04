@@ -73,8 +73,8 @@ overflow-x: hidden;
     font-size: 3.5vw;
     line-height: 110%;
     color:black;
-    padding: 0 2rem;
-    padding-bottom: 10rem;
+    padding: 5rem 2rem;
+    /* padding-bottom: 10rem; */
 }
 .text-table{
     flex-flow: column;
@@ -92,7 +92,7 @@ overflow-x: hidden;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 30vh;
+    /* height: 30vh; */
     margin-bottom: -1px;
     overflow: hidden;
     color: #000;
@@ -101,13 +101,25 @@ overflow-x: hidden;
     aspect-ratio: 1;
     text-align: center;
     mix-blend-mode: difference;
-    border-right: 1px solid #000;
+   
     width: 200px;
     height: 200px;
- 
     font-size: 180px;
     font-weight: 300;
-    line-height: 130%;
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.b-r{
+  width: 100%;
+    display: inline-block;
+    align-items: center;
+    height: 90%;
+    border-right: 1px solid #000;
+    display: flex
+;
+    justify-content: center;
 }
 .table-right{
     z-index: 2;
@@ -116,7 +128,7 @@ overflow-x: hidden;
     justify-content: flex-start;
     align-items: center;
     height: 100%;
-    padding: 20px 200px 20px 40px;
+    padding: 0 0 0 40px;
     display: flex
 ;
     position: relative;
@@ -130,7 +142,7 @@ overflow-x: hidden;
 
 .blank{
     width: 100%;
-     height: 10vh;
+     height: 50vh;
     
 }
 .tag{
@@ -180,7 +192,7 @@ height: fit-content;
   }
 
   .visual-feed{
- 
+    padding-bottom: 50vh;
     width: 100%;
     position: relative;
     background-color: #fff;
@@ -361,3 +373,61 @@ margin-top: -5%;
     max-width: 100%;
     display: inline-block;
   }
+
+  @media (max-width: 1000px) {
+  .hero-content{
+    flex-flow:row;
+  }
+  .cursor-row {
+    flex-direction: column;
+  }
+  .cursor-image {
+    width: 33vw;  
+  }
+  .hero-heading{
+    font-size: 21vw;
+  }
+  .count{
+    font-size: 100px;
+
+  }
+  .b-r{
+    height: 75%;
+  }
+  }
+  @media screen and (max-width: 479px) {
+    .count {
+        width: 60px;
+        font-size: 48px;
+        height:118px;
+    }
+    .table-right{
+      font-size: 18px;
+      padding-left: 20px;
+    }
+    .text-table {
+      margin-left: 10px;
+      margin-right: 10px;
+}
+.tag{
+  font-size:12px;
+  padding: 4px 14px;
+  
+}
+.simple-text, .simple-text-2 {
+  font-size: 24px;
+  gap:1rem;
+  padding-top: 1rem;
+}
+}
+@media screen and (max-width: 769px) {
+  .simple-text, .simple-text-2 {
+ 
+    padding-top: 1rem;
+  }
+  .grid-box {
+      margin-left: 10px;
+      margin-right: 10px;
+      grid-column-gap: 0px;
+  }
+}
