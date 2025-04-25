@@ -131,6 +131,7 @@ cursor: pointer;
   padding: 16px 0px;
 }
 footer{
+  box-sizing: border-box;
   padding: 107px 20px 40px;
   background-color: white;
 }
@@ -157,7 +158,7 @@ footer{
   flex-direction: column;
   flex-wrap: nowrap;
   gap: 70px;
-  height: 100%;
+
   position:relative;
   justify-content: flex-start;
   padding: 40px 40px 0 0;
@@ -171,12 +172,12 @@ footer{
   margin-top:0px;
 }
 .video-grid{
-display: flex;
-flex-direction: column;
-position: absolute;
-right:0;
-top:25%;
-right:4%;
+  display: flex
+  ;
+      flex-direction: column;
+      position: absolute;
+      right: 0;
+      bottom: 0;
 }
 .video-grid span{
   color:gray
@@ -239,7 +240,7 @@ right:4%;
   color:white;
   border-radius:100px;
   margin:0;
-  padding: 4px 10px;
+  padding: 4px 16px;
 }
 
 .footer-bottom{
@@ -592,7 +593,7 @@ position: relative;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 50vh;
+  height: 320px;
   background-color: #eee;
   z-index: 9999;
   display: flex;
@@ -601,7 +602,7 @@ position: relative;
   box-sizing: border-box;
 }
 .left-links, .right-links{
-  padding:10px;
+  padding:18px;
   display: flex
 ;
     flex-direction: column;
@@ -666,7 +667,39 @@ footer{
   font-size: 10px;
 }
 }
+footer{
+  height:100vh;
+
+}
+.right-top-f{
+  display: flex;
+  flex-direction: column;
+  gap:80px
+}
+.footer-top{
+  height: -webkit-fill-available;
+}
+.footer-left,.footer-right{
+  justify-content: space-between;
+}
+
+
+.footer-left-top {
+  display: flex
+;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+
+
 @media (max-width: 420px) {
+  .left-links, .right-links{
+    padding:10px;
+  }
   .slide-card{
  
     width: 300px;
@@ -695,26 +728,50 @@ flex-direction: column;
     padding-left: 0px;
       gap: 60px;
   }
+  .footer-logo{
+    width: 100%;
+    height: auto;
+  }
   .ff{
     flex-direction: row;
   }
   footer{
     padding-top: 2px;
   }
-  .footer-left{
 
-      padding-right: 0;
-      border-right: 0px;
-  }
   .footer-text{
-    font-size: 27px;
+    font-size: 40px;
+  }
+  .logo-wrapper{
+    height:35vh
+   }
+   /* .footer-btn{
+    position: absolute;
+
+    left: unset;
+    transform: none;
+    top:50%;
+    right:0;
+  } */
+
+  .footer-bottom{
+
+    position: relative;
+  }
+  .video-grid video{
+    width: 370px;
+    height: auto;
   }
     }
 
 @media (max-width: 810px) {
-  .logo-wrapper{
-    height:35vh
-   }
+  .footer-text {
+    font-size: 27px;
+}
+footer{
+  height:auto
+}
+ 
   .hero-text{
     width: auto;
   }
