@@ -142,7 +142,7 @@ overflow-x: hidden;
 
 .blank{
     width: 100%;
-     height: 50vh;
+     height: 30vh;
     
 }
 .tag{
@@ -430,4 +430,11 @@ margin-top: -5%;
       margin-right: 10px;
       grid-column-gap: 0px;
   }
+}
+@media screen and (min-width: 2000px) {
+  .table-right{
+    font-size: 80px;
+  }
+
+  
 }

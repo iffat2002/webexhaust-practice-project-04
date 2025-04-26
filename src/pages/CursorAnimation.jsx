@@ -19,9 +19,9 @@ const CursorAnimation = () => {
           end: "bottom bottom",
           scrub: true,
         },
-        x: 0, // translateX
-        y: 0, // translateY
-        z: 0, 
+        x: 0,
+        y: 0,
+        z: 0,
         willChange: "width, height, transform",
         width: "400vw",
         scaleX: 1,
@@ -32,21 +32,21 @@ const CursorAnimation = () => {
         rotateZ: 359,
         skewX: 0,
         skewY: 0,
-        transformStyle: "preserve-3d !important", 
+        transformStyle: "preserve-3d !important",
         ease: "none",
       });
     });
   }, []);
   useEffect(() => {
     gsap.utils.toArray(".table-row").forEach((row, index) => {
-      const SMobile = window.innerWidth <= 480; // Adjust this breakpoint as needed
+      const SMobile = window.innerWidth <= 480;
       gsap.fromTo(
         row.querySelector(".table-right"),
         {
           x: 0,
         },
         {
-        x: SMobile ? 60 : 210,
+          x: SMobile ? 60 : 210,
           scrollTrigger: {
             trigger: row,
             start: "top 90%",
@@ -155,38 +155,35 @@ const CursorAnimation = () => {
         duration: 2,
       });
 
-
-      gsap
+    gsap
       .timeline({
         scrollTrigger: {
           trigger: ".item-3",
           start: "top top",
           end: "",
-       
+
           scrub: true,
           markers: false,
         },
       })
-      .to(".item-3", { scaleX: 1.1,  duration: 3 })
+      .to(".item-3", { scaleX: 1.1, duration: 3 })
       .to(".item-3", {
         scaleX: 0,
         scaleY: 1.3,
         skewY: -6,
-        delay:10,
+        delay: 10,
         skewX: 0,
         duration: 10,
       });
 
-
-      gsap
+    gsap
       .timeline({
         scrollTrigger: {
           trigger: ".item-4",
           start: "top 20%",
-         end: "top -30%",
+          end: "top -30%",
           scrub: true,
           markers: false,
-        
         },
       })
       .to(".item-4", { scaleX: 1.3, scaleY: 0.8, duration: 6 })
@@ -241,25 +238,33 @@ const CursorAnimation = () => {
       </section>
       <div className="text-table">
         <div className="table-row">
-          <div className="count"><span className="b-r">1</span></div>
+          <div className="count">
+            <span className="b-r">1</span>
+          </div>
           <div className="table-right">
             Research, brainstorming & conception
           </div>
         </div>
         <div className="table-row">
-          <div className="count"><span className="b-r">2</span></div>
+          <div className="count">
+            <span className="b-r">2</span>
+          </div>
           <div className="table-right">
             Research, brainstorming & conception
           </div>
         </div>
         <div className="table-row">
-          <div className="count"><span className="b-r">3</span></div>
+          <div className="count">
+            <span className="b-r">3</span>
+          </div>
           <div className="table-right">
             Research, brainstorming & conception
           </div>
         </div>
         <div className="table-row">
-          <div className="count"><span className="b-r">4</span></div>
+          <div className="count">
+            <span className="b-r">4</span>
+          </div>
           <div className="table-right">
             Research, brainstorming & conception
           </div>
@@ -294,9 +299,7 @@ const CursorAnimation = () => {
             />
           </div>
           <div className="item-4">
-            <img
-              className="item-img-4"
-            />
+            <img className="item-img-4" />
           </div>
           <div className="item-4">
             <img
