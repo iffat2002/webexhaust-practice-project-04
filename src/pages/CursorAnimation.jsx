@@ -37,34 +37,47 @@ const CursorAnimation = () => {
       });
     });
   }, []);
+
   useEffect(() => {
     gsap.utils.toArray(".table-row").forEach((row, index) => {
       const SMobile = window.innerWidth <= 480;
+      const rightElement = row.querySelector(".table-right");
+      const countElement = row.querySelector(".b-r");
+  
+      // Set initial rotation for count
+      gsap.set(countElement, { rotateZ: 45 });
+  
+      // Animate both rightElement and countElement
       gsap.fromTo(
-        row.querySelector(".table-right"),
+        [rightElement, countElement],
         {
           x: 0,
+ 
         },
         {
-          x: SMobile ? 60 : 210,
+          x: (i) => (i === 0 ? (SMobile ? 60 : 210) : 0), 
+          rotateZ: (i) => (i === 0 ? 0 : 0), 
           scrollTrigger: {
             trigger: row,
             start: "top 90%",
+            duration: 1,
             end: "top -10%",
             scrub: false,
             once: false,
             markers: false,
             toggleActions: "play none none reverse",
             onEnterBack: () => {
-              gsap.to(row.querySelector(".table-right"), {
-                x: SMobile ? 60 : 210,
+              gsap.to([rightElement, countElement], {
+                x: (i) => (i === 0 ? (SMobile ? 60 : 210) : 0),
+                rotate: 0,
                 duration: 1,
                 ease: "power1.inOut",
               });
             },
             onLeave: () => {
-              gsap.to(row.querySelector(".table-right"), {
-                x: SMobile ? 60 : 210,
+              gsap.to([rightElement, countElement], {
+                x: (i) => (i === 0 ? (SMobile ? 60 : 210) : 0),
+                rotate: 0,
                 duration: 1,
                 ease: "power1.inOut",
               });
@@ -75,9 +88,12 @@ const CursorAnimation = () => {
         }
       );
     });
+  }, []);
 
+  useEffect(() => {
+ 
     gsap.to(".simple-text", {
-      x: (i) => (i % 2 === 0 ? -500 : 0),
+      x: (i) => (i % 2 === 0 ? -1000 : 0),
       ease: "none",
       scrollTrigger: {
         trigger: ".x-text",
@@ -90,7 +106,7 @@ const CursorAnimation = () => {
 
     gsap.fromTo(
       ".simple-text-2",
-      { x: -500 },
+      { x: -1000 },
       {
         x: 0,
         ease: "none",
@@ -110,7 +126,7 @@ const CursorAnimation = () => {
       scrollTrigger: {
         trigger: ".visual-feed",
         start: "top top",
-        end: "bottom top",
+        end: "bottom 40%",
         toggleActions: "play reverse play reverse",
         markers: false,
       },
@@ -198,6 +214,13 @@ const CursorAnimation = () => {
 
   return (
     <div>
+    <div className="cursor-header">
+      <a>Lydija Kühr</a>
+      <div>
+        <a>Info</a>
+        <a>Email</a>
+      </div>
+    </div>
       <section className="hero">
         <div className="hero-container">
           <div className="hero-content">
@@ -311,134 +334,141 @@ const CursorAnimation = () => {
       </div>
 
       {/* scroll marquee */}
+      <div class="label-box"><h2 class="label">What happened so far</h2></div>
+
       <div className="x-text">
         <div className="simple-text">
           <span>Deutsche Bahn</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Barlach Haus</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Directline</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Finanzen.de</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Bauwelt</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Baunetz
+          </span>
           <div className="tag">clients</div>
         </div>
 
         <div className="simple-text">
           <span>Deutsche Bahn</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Barlach Haus</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Directline</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Finanzen.de</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Bauwelt</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Baunetz
+          </span>
           <div className="tag">clients</div>
         </div>
       </div>
 
       <div className="x-text-2">
         <div className="simple-text-2">
+          <span>Golden Award of Montreux</span>
+          <div className="tag">awards</div>
+          <span>Mobius Award</span>
+          <div className="tag">awards</div>
+          <span>European Design Award</span>
+          <div className="tag">awards</div>
+          <span>Lead Award: Webmagazin des Jahres</span>
+          <div className="tag">awards</div>
           <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
+          <div className="tag">awards</div>
           <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
+          <div className="tag">awards</div>
         </div>
 
         <div className="simple-text-2">
+        <span>Golden Award of Montreux</span>
+          <div className="tag">awards</div>
+          <span>Mobius Award</span>
+          <div className="tag">awards</div>
+          <span>European Design Award</span>
+          <div className="tag">awards</div>
+          <span>Lead Award: Webmagazin des Jahres</span>
+          <div className="tag">awards</div>
           <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
+          <div className="tag">awards</div>
           <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
+          <div className="tag">awards</div>
         </div>
       </div>
 
       <div className="x-text">
         <div className="simple-text">
-          <span>Deutsche Bahn</span>
+          <span>Deutsche Telekom</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Sozialhelden</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Uncube</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Urbz</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Perspectives</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>ZDF</span>
           <div className="tag">clients</div>
         </div>
 
         <div className="simple-text">
-          <span>Deutsche Bahn</span>
+        <span>Deutsche Telekom</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Sozialhelden</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Uncube</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Urbz</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>Perspectives</span>
           <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
+          <span>ZDF</span>
           <div className="tag">clients</div>
         </div>
       </div>
 
       <div className="x-text-2">
         <div className="simple-text-2">
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
+          <span>DDC — Gute Gestaltung</span>
+          <div className="tag">awards</div>
+          <span>Lovie Award</span>
+          <div className="tag">awards</div>
+          <span>DMMA Onlinestar</span>
+          <div className="tag">awards</div>
+          <span>Annual Multimedia Award</span>
+          <div className="tag">awards</div>
+          <span>Red Dot</span>
+          <div className="tag">awards</div>
+          <span>IF Award</span>
+          <div className="tag">awards</div>
         </div>
 
         <div className="simple-text-2">
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
-          <span>Deutsche Bahn</span>
-          <div className="tag">clients</div>
+        <span>DDC — Gute Gestaltung</span>
+          <div className="tag">awards</div>
+          <span>Lovie Award</span>
+          <div className="tag">awards</div>
+          <span>DMMA Onlinestar</span>
+          <div className="tag">awards</div>
+          <span>Annual Multimedia Award</span>
+          <div className="tag">awards</div>
+          <span>Red Dot</span>
+          <div className="tag">awards</div>
+          <span>IF Award</span>
+          <div className="tag">awards</div>
         </div>
       </div>
-      <div className="blank"></div>
+      <div className="cursor-footer">
+        <a className="legal">Legal</a>
+        <a onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Only upwards from here</a>
+      </div>
     </div>
   );
 };
